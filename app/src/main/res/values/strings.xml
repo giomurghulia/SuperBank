@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SuperBank</string>
+    <string name="my_cards">My Cards</string>
+    <string name="home">Home</string>
+    <string name="cards">Cards</string>
+    <string name="transaction">Transaction</string>
+    <string name="profile">Profile</string>
+</resources>
