@@ -5,4 +5,6 @@
     <string name="cards">Cards</string>
     <string name="transaction">Transaction</string>
     <string name="profile">Profile</string>
+    <string name="transfer">Transfer</string>
+    <string name="send">Send</string>
 </resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "431957500286",
+    "project_id": "superbank-ae946",
+    "storage_bucket": "superbank-ae946.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:431957500286:android:0ed0e1bdc7bb56da32d32f",
+        "android_client_info": {
+          "package_name": "com.example.superbank"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "431957500286-rpj4r14lfp09ohbie8m0u9isp4e33mt8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmzDqhwajhwIwmF8u03A66qhX2l4XMsm8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "431957500286-rpj4r14lfp09ohbie8m0u9isp4e33mt8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
