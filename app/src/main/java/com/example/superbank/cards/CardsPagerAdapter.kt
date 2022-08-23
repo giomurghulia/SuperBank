@@ -45,7 +45,7 @@ class CardsPagerAdapter : RecyclerView.Adapter<CardsPagerAdapter.ViewHolder>() {
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Card) {
             binding.carNumberText.text = getCardNumber(item.cardNumber)
-            binding.balanceText.text = item.cardBallance.toString()
+            binding.balanceText.text = item.cardBalance.toString()
             binding.cardDateText.text = item.cardDate
 
             if (item.cardType == VISA) {

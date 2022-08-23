@@ -1,6 +1,7 @@
 package com.example.superbank.networking
 
 import com.example.superbank.cards.Card
+import com.example.superbank.cards.UpcomingPayment
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
@@ -34,6 +35,6 @@ interface ApiService {
     @POST("ab565edd-01b6-417e-bbdc-502c3b432cd9")
     suspend fun getCards(): Response<List<Card>>
 
-    @POST("91fc90ba-bebe-476a-8198-9389d9306671")
-    suspend fun getPayment(): Response<Any>
+    @POST("97b1fc29-5d3d-44c1-831e-02a4c417f78f")
+    suspend fun getUpcomingPayment(): Response<UpcomingPayment>
 }

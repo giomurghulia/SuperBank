@@ -9,8 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.viewpager2.widget.ViewPager2
 import com.example.superbank.databinding.FragmentMyCardsBinding
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.launch
 
 class MyCardFragment : Fragment() {
@@ -19,6 +22,7 @@ class MyCardFragment : Fragment() {
     private val viewModel: MyCardsViewModel by viewModels()
 
     private val cardsAdapter = CardsPagerAdapter()
+    private val myCardsAdapter = MyCardsAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +40,22 @@ class MyCardFragment : Fragment() {
 
         binding.cardViewpager.adapter = cardsAdapter
         binding.cardViewpager.setPageTransformer(MarginPageTransformer(40))
+        binding.cardViewpager.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
+
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+
+                viewModel.onCardSelected(position)
+            }
+        })
+
+        TabLayoutMediator(binding.tabLayout, binding.cardViewpager) { tab, position ->
+            //Some implementation
+        }.attach()
+
+        binding.mainRecycler.layoutManager = LinearLayoutManager(requireContext())
+        binding.mainRecycler.adapter = myCardsAdapter
 
         viewModel.getCards()
 
@@ -43,6 +63,13 @@ class MyCardFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.cards.collect {
                     cardsAdapter.submitList(it)
+                }
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.ListItems.collect {
+                    myCardsAdapter.submitList(it)
                 }
             }
         }

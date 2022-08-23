@@ -7,4 +7,6 @@
     <string name="profile">Profile</string>
     <string name="available_balance">Available Balance</string>
     <string name="usd">$</string>
+    <string name="make_payment">Make Payment</string>
+    <string name="due">Due:</string>
 </resources>
