@@ -15,7 +15,7 @@ import retrofit2.http.Query
 object RetrofitClient {
     private const val BASE_URL = "https://run.mocky.io/v3/"
     private const val TOKEN_KEY = "token"
-    var token: String? = "null"
+    var token: String? = null
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         setLevel(HttpLoggingInterceptor.Level.BODY)
