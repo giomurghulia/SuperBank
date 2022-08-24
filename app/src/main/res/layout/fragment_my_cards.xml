@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    android:padding="25dp"
-    tools:context=".cards.MyCardFragment">
+    android:paddingHorizontal="20dp"
+    tools:context=".cards.CardFragment">
 
     <TextView
         android:id="@+id/title_text"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"

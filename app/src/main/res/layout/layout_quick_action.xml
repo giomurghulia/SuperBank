@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape_item"
-    android:orientation="vertical"
-    android:padding="25dp">
+    android:layout_marginTop="20dp"
+    android:background="@drawable/shape_item_background"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/card_info_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginVertical="8dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
         tools:ignore="MissingConstraints">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="12dp"
-            android:src="@drawable/ic_card_icon" />
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/shape_icon_background"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_statement_icon" />
 
         <TextView
             android:layout_width="0dp"
@@ -28,34 +31,37 @@
             android:layout_weight="1"
             android:drawablePadding="16dp"
             android:gravity="center_vertical"
-            android:text="View Card Info"
+            android:text="@string/view_card_iban"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_marginRight="12dp"
             android:src="@drawable/ic_right" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/white" />
+        android:background="#585858" />
 
     <LinearLayout
         android:id="@+id/change_pin_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginVertical="8dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
         tools:ignore="MissingConstraints">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="12dp"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/shape_icon_background"
+            android:scaleType="centerInside"
             android:src="@drawable/ic_pin_icon" />
 
         <TextView
@@ -64,34 +70,37 @@
             android:layout_weight="1"
             android:drawablePadding="16dp"
             android:gravity="center_vertical"
-            android:text="Change Card Pin"
+            android:text="@string/change_card_pin"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_marginRight="12dp"
             android:src="@drawable/ic_right" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/white" />
+        android:background="#585858" />
 
     <LinearLayout
         android:id="@+id/remove_card_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginVertical="8dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
         tools:ignore="MissingConstraints">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="12dp"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/shape_icon_background"
+            android:scaleType="centerInside"
             android:src="@drawable/ic_remove" />
 
         <TextView
@@ -100,14 +109,13 @@
             android:layout_weight="1"
             android:drawablePadding="16dp"
             android:gravity="center_vertical"
-            android:text="Remove Card"
+            android:text="@string/remove_card"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_marginRight="12dp"
             android:src="@drawable/ic_right" />
     </LinearLayout>
 

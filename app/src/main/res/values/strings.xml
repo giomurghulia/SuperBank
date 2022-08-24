@@ -9,4 +9,8 @@
     <string name="usd">$</string>
     <string name="make_payment">Make Payment</string>
     <string name="due">Due:</string>
+    <string name="minus">-</string>
+    <string name="remove_card">Remove Card</string>
+    <string name="change_card_pin">Change Card Pin</string>
+    <string name="view_card_iban">View Card IBAN</string>
 </resources>

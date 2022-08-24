@@ -1,5 +1,6 @@
 package com.example.superbank.cards
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,13 +17,13 @@ import com.example.superbank.databinding.FragmentMyCardsBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.launch
 
-class MyCardFragment : Fragment() {
+class CardFragment : Fragment() {
     private lateinit var binding: FragmentMyCardsBinding
 
-    private val viewModel: MyCardsViewModel by viewModels()
+    private val viewModel: CardViewModel by viewModels()
 
     private val cardsAdapter = CardsPagerAdapter()
-    private val myCardsAdapter = MyCardsAdapter()
+    private val cardDescriptionAdapter = CardDescriptionAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +38,8 @@ class MyCardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.getCards()
 
         binding.cardViewpager.adapter = cardsAdapter
         binding.cardViewpager.setPageTransformer(MarginPageTransformer(40))
@@ -55,9 +58,8 @@ class MyCardFragment : Fragment() {
         }.attach()
 
         binding.mainRecycler.layoutManager = LinearLayoutManager(requireContext())
-        binding.mainRecycler.adapter = myCardsAdapter
+        binding.mainRecycler.adapter = cardDescriptionAdapter
 
-        viewModel.getCards()
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -66,12 +68,37 @@ class MyCardFragment : Fragment() {
                 }
             }
         }
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.ListItems.collect {
-                    myCardsAdapter.submitList(it)
+                viewModel.listItems.collect {
+                    cardDescriptionAdapter.submitList(it)
+                    binding.mainRecycler.postDelayed({
+                        binding.mainRecycler.smoothScrollToPosition(0)
+                    }, 300)
                 }
             }
         }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.alertDialog.collect {
+                    makeAlertDialog(it)
+                }
+            }
+        }
+
+        cardDescriptionAdapter.setCallBack(object : CardDescriptionAdapter.CallBack {
+            override fun onItemClick(itemId: QuickActionEnum) {
+                viewModel.onItemClick(itemId)
+            }
+        })
+    }
+
+    private fun makeAlertDialog(alert:String) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Super Bank")
+        builder.setMessage(alert)
+        val newAlert = builder.create()
+        newAlert.show()
     }
 }

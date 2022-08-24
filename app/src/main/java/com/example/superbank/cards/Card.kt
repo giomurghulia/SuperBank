@@ -6,4 +6,6 @@ data class Card(
     val cardDate: String,
     val cardCvc: Int,
     val cardType: String,
+    val iban: String,
+    val uniqueId: String
 )

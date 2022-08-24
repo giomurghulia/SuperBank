@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/shape_card_item"
+    android:background="@drawable/shape_card_item_background"
     android:padding="20dp">
 
     <ImageView
@@ -40,6 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@id/currency_text"
         app:layout_constraintTop_toBottomOf="@id/balanceTitle_text"
         tools:text="2,200" />
@@ -49,6 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/usd"
+        android:textSize="16sp"
         android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@id/balance_text"
         app:layout_constraintTop_toBottomOf="@id/balanceTitle_text" />

@@ -5,6 +5,6 @@
     app:startDestination="@id/myCardFragment">
     <fragment
         android:id="@+id/myCardFragment"
-        android:name="com.example.superbank.cards.MyCardFragment"
+        android:name="com.example.superbank.cards.CardFragment"
         android:label="MyCardFragment" />
 </navigation>
