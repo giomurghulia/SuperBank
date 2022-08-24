@@ -47,7 +47,7 @@ class TransferViewModel : ViewModel() {
 
             if (!isInteger(address[0].toString())
                 && !isInteger(address[1].toString())
-                && isInteger(address.subSequence(2, 5).toString())
+                && isInteger(address.substring(2,6))
             ) {
                 checkIban = true
             }
