@@ -3,12 +3,28 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/button.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/export.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/gradient.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_visa.xml" value="0.163" />
+        <entry key="app/src/main/res/drawable/income.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/line.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/rounded_corners.xml" value="0.107" />
+        <entry key="app/src/main/res/drawable/rounded_corners_selected.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/sdas.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/shape_card.xml" value="0.163" />
+        <entry key="app/src/main/res/drawable/trasfer.xml" value="0.107" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.26135310472659873" />
         <entry key="app/src/main/res/layout/fragment_my_cards.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.2453125" />
+        <entry key="app/src/main/res/layout/fragment_transactions.xml" value="0.15982905982905982" />
+        <entry key="app/src/main/res/layout/inner_recycler.xml" value="0.1648148148148148" />
+        <entry key="app/src/main/res/layout/inner_recycler_item.xml" value="0.15220483641536273" />
+        <entry key="app/src/main/res/layout/innner_recycler.xml" value="0.1648148148148148" />
         <entry key="app/src/main/res/layout/layout_card.xml" value="0.16940289367473005" />
+        <entry key="app/src/main/res/layout/outer_recycler.xml" value="0.173828125" />
+        <entry key="app/src/main/res/layout/outer_recycler_item.xml" value="0.1" />
         <entry key="app/src/main/res/menu/my_menu.xml" value="0.24635416666666668" />
       </map>
     </option>

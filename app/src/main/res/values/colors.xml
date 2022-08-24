@@ -7,4 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="filter_selector_color">#414A6180</color>
+    <color name="line_separator">#585858</color>
+    <color name="not_selected">#414A61</color>
 </resources>

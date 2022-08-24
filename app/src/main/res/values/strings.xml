@@ -5,4 +5,9 @@
     <string name="cards">Cards</string>
     <string name="transaction">Transaction</string>
     <string name="profile">Profile</string>
+    <string name="recent">Recent</string>
+    <string name="select_time_range"><a href="#">Select Time Range</a></string>
+    <string name="all">All</string>
+    <string name="income">\tIncome</string>
+    <string name="expense">\tExpense</string>
 </resources>
