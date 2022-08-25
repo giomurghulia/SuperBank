@@ -5,7 +5,7 @@
     app:startDestination="@id/myCardFragment">
     <fragment
         android:id="@+id/myCardFragment"
-        android:name="com.example.superbank.cards.MyCardFragment"
+        android:name="com.example.superbank.cards.CardFragment"
         android:label="MyCardFragment" />
 
     <fragment
@@ -13,7 +13,7 @@
         android:name="com.example.superbank.transactions.ui.TransactionsFragment"
         android:label="TransactionFragment" />
     <fragment
-        android:id="@+id/transferfრაგმენტ"
+        android:id="@+id/transferFragment"
         android:name="com.example.superbank.transfer.TransferFragment"
         android:label="TransactionFragment" />
 </navigation>

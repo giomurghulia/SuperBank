@@ -9,11 +9,11 @@
         android:icon="@drawable/ic_card_icon"
         android:title="@string/cards" />
     <item
-        android:id="@+id/transactionFragment"
+        android:id="@id/transactionFragment"
         android:icon="@drawable/ic_transactions_icon"
         android:title="@string/transaction" />
     <item
-        android:id="@+id/profileFragment"
+        android:id="@id/transferFragment"
         android:icon="@drawable/ic_profile_icon"
         android:title="@string/profile" />
 
