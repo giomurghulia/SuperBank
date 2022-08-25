@@ -5,7 +5,7 @@
         android:icon="@drawable/ice_home_icon"
         android:title="@string/home" />
     <item
-        android:id="@id/myCardFragment"
+        android:id="@id/CardFragment"
         android:icon="@drawable/ic_card_icon"
         android:title="@string/cards" />
     <item
