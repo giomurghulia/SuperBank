@@ -6,6 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsets
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -88,9 +92,13 @@ class TransferFragment : Fragment() {
                     when (it) {
                         is Resource.Success -> {
                             binding.addressFullNameText.text = it.user.fullName
+
+                            clocheKeyboard()
                         }
                         is Resource.Error -> {
                             binding.addressFullNameText.text = it.errorMessage
+
+                            clocheKeyboard()
                         }
                         is Resource.SuccessTransfer -> {
                             successTransfer()
@@ -170,5 +178,10 @@ class TransferFragment : Fragment() {
 
         binding.addressInput.setText("")
         binding.amountInput.setText("")
+    }
+
+    private fun clocheKeyboard(){
+        val controller = WindowCompat.getInsetsController(requireActivity().window, binding.root)
+        controller.hide(WindowInsetsCompat.Type.ime())
     }
 }
