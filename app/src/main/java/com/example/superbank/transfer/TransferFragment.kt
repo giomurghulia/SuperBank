@@ -1,6 +1,7 @@
 package com.example.superbank.transfer
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -65,16 +66,34 @@ class TransferFragment : Fragment() {
             viewModel.getFields(address)
         }
 
+        binding.sendButton.setOnClickListener {
+            if (checkForm()) {
+                val address = binding.addressInput.text.toString()
+                val amount = binding.amountInput.text.toString().toDouble()
+                viewModel.makeTransfer(address, amount)
+            }
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.fields.collect {
+                viewModel.transfer.collect {
                     when (it) {
                         is Resource.Success -> {
                             binding.addressFullNameText.text = it.user.fullName
                         }
                         is Resource.Error -> {
                             binding.addressFullNameText.text = it.errorMessage
+                        }
+                        is Resource.SuccessTransfer -> {
+                            successTransfer()
+                        }
+
+                        is Resource.ErrorTransfer -> {
+                            val builder = AlertDialog.Builder(requireContext())
+                            builder.setTitle("Super Bank")
+                            builder.setMessage(it.errorMessage)
+                            val newAlert = builder.create()
+                            newAlert.show()
                         }
                     }
                 }
@@ -115,4 +134,33 @@ class TransferFragment : Fragment() {
         }
     }
 
+    private fun checkForm(): Boolean {
+        val address = binding.addressInput.text?.toString()
+        val amount = binding.amountInput.text?.toString()
+
+        var checker = true
+
+        if (address.isNullOrEmpty()) {
+            binding.addressLayout.error = "Address Is Empty"
+            checker = false
+        }
+
+        if (amount.toString().isBlank()) {
+            binding.amountLayout.error = "Fill Amount"
+            checker = false
+        }
+
+        return checker
+    }
+
+    private fun successTransfer() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Super Bank")
+        builder.setMessage("Transaction Success")
+        val newAlert = builder.create()
+        newAlert.show()
+
+        binding.addressInput.setText("")
+        binding.amountInput.setText("")
+    }
 }

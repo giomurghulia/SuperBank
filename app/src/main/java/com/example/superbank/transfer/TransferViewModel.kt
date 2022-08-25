@@ -11,14 +11,11 @@ import kotlinx.coroutines.launch
 class TransferViewModel : ViewModel() {
     private var selectedCard: Int = 0
 
-    val IBAN = "iban"
-    val NUMBER = "number"
-
     private val _cards = MutableStateFlow<List<Card>>(emptyList())
     val cards get() = _cards.asStateFlow()
 
-    private val _fields = MutableStateFlow<Resource>(Resource.Success(User("")))
-    val fields get() = _fields.asStateFlow()
+    private val _transfer = MutableStateFlow<Resource>(Resource.Error(""))
+    val transfer get() = _transfer.asStateFlow()
 
     private var myCards = listOf<Card>()
 
@@ -38,59 +35,77 @@ class TransferViewModel : ViewModel() {
                 myCards = cards ?: emptyList()
             }
         }
-        _fields.value
+        _transfer.value
     }
 
     fun getFields(address: String) {
-        if (address.length == 6) {
-            var checkIban = false
-
-            if (!isInteger(address[0].toString())
-                && !isInteger(address[1].toString())
-                && isInteger(address.substring(2,6))
-            ) {
-                checkIban = true
-            }
-
-            if (checkIban) {
-                viewModelScope.launch {
-                    val response = RetrofitClient.apiService.getUserWithIban(address)
-
-                    if (response.isSuccessful) {
-                        val body = response.body()
-                        _fields.value = Resource.Success(body ?: User(""))
-                    } else {
-                        val errorBody = response.errorBody()
-                        _fields.value = Resource.Error(errorBody?.toString() ?: "User Did Not Find")
-                    }
-                }
-            } else {
-                _fields.value = Resource.Error("Incorrect IBAN")
-            }
-
-        } else if (address.length == 9) {
-            if (isInteger(address)) {
-                viewModelScope.launch {
-                    val response = RetrofitClient.apiService.getUserWithNumber(address)
-
-                    if (response.isSuccessful) {
-                        val body = response.body()
-                        _fields.value = Resource.Success(body ?: User(""))
-                    } else {
-                        val errorBody = response.errorBody()
-                        _fields.value = Resource.Error(errorBody?.toString() ?: "User Did Not Find")
-                    }
-                }
-            } else {
-                _fields.value = Resource.Error("Incorrect Number")
-            }
+        if (address.length == 6 && checkIban(address)) {
+            getUserWithIban(address)
+        } else if (address.length == 9 && isInteger(address)) {
+            getUserWithMobile(address)
         } else if (address.length > 9) {
-            _fields.value = Resource.Error("Incorrect Address")
+            _transfer.value = Resource.Error("Incorrect Address")
         } else {
-            _fields.value = Resource.Error("")
+            _transfer.value = Resource.Error("")
         }
     }
 
     private fun isInteger(str: String?) = str?.toIntOrNull()?.let { true } ?: false
 
+    private fun checkIban(iban: String): Boolean {
+        if (!isInteger(iban[0].toString())
+            && !isInteger(iban[1].toString())
+            && isInteger(iban.substring(2, 6))
+        ) {
+            return true
+        }
+        return false
+    }
+
+    private fun getUserWithIban(iban: String) {
+        viewModelScope.launch {
+            val response = RetrofitClient.apiService.getUserWithIban(iban)
+
+            if (response.isSuccessful) {
+                val body = response.body()
+                _transfer.value = Resource.Success(body ?: User(""))
+            } else {
+                val errorBody = response.errorBody()
+                _transfer.value = Resource.Error(errorBody?.toString() ?: "User Did Not Find")
+            }
+        }
+    }
+
+    private fun getUserWithMobile(mobile: String) {
+        viewModelScope.launch {
+            val response = RetrofitClient.apiService.getUserWithNumber(mobile)
+
+            if (response.isSuccessful) {
+                val body = response.body()
+                _transfer.value = Resource.Success(body ?: User(""))
+            } else {
+                val errorBody = response.errorBody()
+                _transfer.value = Resource.Error(errorBody?.toString() ?: "User Did Not Find")
+            }
+        }
+    }
+
+    fun makeTransfer(address: String, amount: Double) {
+        if (_transfer.value is Resource.Success) {
+            viewModelScope.launch {
+                val transaction = Transaction(myCards[selectedCard].uniqueId, address, amount)
+
+                val response = RetrofitClient.apiService.makeTransfer(transaction)
+
+                if (selectedCard != 1) {
+                    _transfer.value = Resource.SuccessTransfer(transaction)
+                } else {
+                    _transfer.value = Resource.ErrorTransfer("Transfer Problem")
+                }
+            }
+        }
+        else{
+            _transfer.value = Resource.Error("User Did Not Find")
+        }
+    }
 }

@@ -3,6 +3,7 @@ package com.example.superbank.networking
 import com.example.superbank.cards.Card
 import com.example.superbank.cards.CardTransactions
 import com.example.superbank.cards.UpcomingPayment
+import com.example.superbank.transfer.Transaction
 import okhttp3.Interceptor
 import com.example.superbank.transfer.User
 import okhttp3.OkHttpClient
@@ -10,6 +11,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.Query
 
@@ -70,4 +72,7 @@ interface ApiService {
 
     @POST("35234356-0b36-417c-8563-0c36b842c3fb")
     suspend fun getCardTransactions(@Query("uniqueId") uniqueId: String): Response<List<CardTransactions>>
+
+    @POST(" ")
+    suspend fun makeTransfer(@Body body:Transaction): Response<String>
 }
