@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
     app:startDestination="@id/CardFragment">
+
     <fragment
         android:id="@+id/CardFragment"
         android:name="com.example.superbank.cards.CardFragment"

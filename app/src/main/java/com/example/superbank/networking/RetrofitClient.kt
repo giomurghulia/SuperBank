@@ -6,6 +6,8 @@ import com.example.superbank.cards.UpcomingPayment
 import com.example.superbank.transfer.Transaction
 import okhttp3.Interceptor
 import com.example.superbank.transfer.User
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
@@ -18,7 +20,10 @@ import retrofit2.http.Query
 object RetrofitClient {
     private const val BASE_URL = "https://run.mocky.io/v3/"
     private const val TOKEN_KEY = "token"
-    var token: String? = null
+    val token: String?
+        get() {
+           return Firebase.auth.currentUser?.uid
+        }
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -38,9 +43,9 @@ object RetrofitClient {
     }
 
     private fun createOkhttpClient(): OkHttpClient {
-    val httpClient = OkHttpClient.Builder()
-        .addInterceptor(addDefaultParams())
-        .addInterceptor(loggingInterceptor)
+        val httpClient = OkHttpClient.Builder()
+            .addInterceptor(addDefaultParams())
+            .addInterceptor(loggingInterceptor)
         return httpClient.build()
     }
 
@@ -77,5 +82,5 @@ interface ApiService {
     suspend fun getTransactions(): Response<List<CardTransactions>>
 
     @POST(" ")
-    suspend fun makeTransfer(@Body body:Transaction): Response<String>
+    suspend fun makeTransfer(@Body body: Transaction): Response<String>
 }

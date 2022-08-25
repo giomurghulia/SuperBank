@@ -10,10 +10,12 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.example.superbank.authorized.AuthorizedUserViewModel
 import com.example.superbank.cards.CardsPagerAdapter
 import com.example.superbank.databinding.FragmentTransferBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -24,6 +26,10 @@ class TransferFragment : Fragment() {
     private val viewModel: TransferViewModel by viewModels()
 
     private val cardsAdapter = CardsPagerAdapter()
+
+    private val sharedViewModel: AuthorizedUserViewModel by viewModels(
+        ownerProducer = { requireParentFragment() }
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +44,8 @@ class TransferFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        sharedViewModel.getUserData()
 
         updateErrorStates()
         updateQuickAmount()

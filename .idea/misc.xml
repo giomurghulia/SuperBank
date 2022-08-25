@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/bill.xml" value="0.1705" />
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.1355" />
+        <entry key="app/src/main/res/drawable/ic_bank_icon.xml" value="0.175" />
         <entry key="app/src/main/res/drawable/ic_card_icon.xml" value="0.175" />
         <entry key="app/src/main/res/drawable/ic_right.xml" value="0.252" />
         <entry key="app/src/main/res/drawable/ic_statement_icon.xml" value="0.1" />
@@ -21,6 +22,8 @@
         <entry key="app/src/main/res/drawable/shape_item.xml" value="0.261" />
         <entry key="app/src/main/res/drawable/shape_selected_dot.xml" value="0.1645" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.26135310472659873" />
+        <entry key="app/src/main/res/layout/fragment_authorized_user.xml" value="0.2453125" />
+        <entry key="app/src/main/res/layout/fragment_guest_user.xml" value="0.22552337646484377" />
         <entry key="app/src/main/res/layout/fragment_my_cards.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/fragment_transactions.xml" value="0.4165497896213184" />
