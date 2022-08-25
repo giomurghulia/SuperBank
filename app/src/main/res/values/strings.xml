@@ -10,4 +10,18 @@
     <string name="all">All</string>
     <string name="income">\tIncome</string>
     <string name="expense">\tExpense</string>
+    <string name="transfer">Transfer</string>
+    <string name="send">Send</string>
+    <string name="available_balance">Available Balance</string>
+    <string name="usd">$</string>
+    <string name="make_payment">Make Payment</string>
+    <string name="due">Due:</string>
+    <string name="minus">-</string>
+    <string name="remove_card">Remove Card</string>
+    <string name="change_card_pin">Change Card Pin</string>
+    <string name="view_card_iban">View Card IBAN</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="iban_or_mobile_number">IBAN Or Mobile Number</string>
+    <string name="amount">Amount</string>
 </resources>
