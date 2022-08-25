@@ -39,6 +39,8 @@ class TransactionsFragment :
                     newList = viewModel.incomeList(timeList)
                 }.invokeOnCompletion {
                     adapter.submitList(newList)
+
+                    scrollToTop()
                 }
                 selectIncome()
             }
@@ -48,12 +50,16 @@ class TransactionsFragment :
                     newList = viewModel.expenseList(timeList)
                 }.invokeOnCompletion {
                     adapter.submitList(newList)
+
+                    scrollToTop()
                 }
                 selectExpense()
             }
             selectorAll.setOnClickListener {
                 adapter.submitList(timeList)
                 selectAll()
+
+                scrollToTop()
             }
             time.setOnClickListener {
                 val myCalendar = Calendar.getInstance()
@@ -118,5 +124,11 @@ class TransactionsFragment :
             income.setTextColor(requireContext().getColor(R.color.not_selected))
             expense.setTextColor(requireContext().getColor(R.color.not_selected))
         }
+    }
+
+    private fun scrollToTop(){
+        binding.recycler.postDelayed({
+            binding.recycler.smoothScrollToPosition(0)
+        }, 300)
     }
 }

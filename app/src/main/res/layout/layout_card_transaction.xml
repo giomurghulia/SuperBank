@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:text="@string/usd"
         android:textColor="@color/white"
-        android:textSize="12sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/amount_text"
