@@ -73,6 +73,9 @@ interface ApiService {
     @POST("35234356-0b36-417c-8563-0c36b842c3fb")
     suspend fun getCardTransactions(@Query("uniqueId") uniqueId: String): Response<List<CardTransactions>>
 
+    @POST("35234356-0b36-417c-8563-0c36b842c3fb")
+    suspend fun getTransactions(): Response<List<CardTransactions>>
+
     @POST(" ")
     suspend fun makeTransfer(@Body body:Transaction): Response<String>
 }
