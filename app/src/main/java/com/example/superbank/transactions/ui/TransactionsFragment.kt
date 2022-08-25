@@ -2,17 +2,20 @@ package com.example.superbank.transactions.ui
 
 import android.app.DatePickerDialog
 import android.graphics.Color
-import android.os.Bundle
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.superbank.R
 import com.example.superbank.basefragments.BaseFragment
 import com.example.superbank.databinding.FragmentTransactionsBinding
-import com.example.superbank.list
+import com.example.superbank.networking.responsestate.ResponseState
 import com.example.superbank.transactions.DATE_FORMAT
 import com.example.superbank.transactions.adapters.OuterAdapter
 import com.example.superbank.transactions.adapters.models.OuterModel
+import com.example.superbank.transactions.getmodel.toOuterList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -20,15 +23,30 @@ import java.util.*
 
 class TransactionsFragment :
     BaseFragment<FragmentTransactionsBinding>(FragmentTransactionsBinding::inflate) {
-    private lateinit var timeList: List<OuterModel>
+    companion object {
+        private var list: List<OuterModel> = listOf()
+    }
+
+    private var timeList: List<OuterModel> = list
     private val viewModel: TransactionsViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        timeList = list
-    }
+
     private val adapter by lazy {
-        OuterAdapter().apply { submitList(list) }
+        OuterAdapter().apply {
+            submitList(list)
+            setOnOuterItemClickListener { title: String, type: String, amount: String, description: String, cardLastDigits: String, date: String ->
+                findNavController().navigate(
+                    TransactionsFragmentDirections.actionTransactionFragmentToTransactionInfoFragment(
+                        type,
+                        amount,
+                        date,
+                        description,
+                        cardLastDigits,
+                        title
+                    )
+                )
+            }
+        }
     }
 
     override fun listeners() {
@@ -74,9 +92,9 @@ class TransactionsFragment :
                         var newList: List<OuterModel> = listOf()
                         val format = SimpleDateFormat(DATE_FORMAT)
                         val cal = format.parse(text)
-                        lifecycleScope.launch(Dispatchers.Default){
+                        lifecycleScope.launch(Dispatchers.Default) {
                             newList = viewModel.timeFilter(list, cal!!)
-                        }.invokeOnCompletion{
+                        }.invokeOnCompletion {
                             timeList = newList
                             adapter.submitList(newList)
                             selectorAll.callOnClick()
@@ -94,39 +112,70 @@ class TransactionsFragment :
     }
 
     override fun bindObservers() {
-
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.transactionsListFlow.collect {
+                    when (it) {
+                        is ResponseState.Success -> {
+                            if (it.body.isNotEmpty()) {
+                                list = it.body.toOuterList()
+                                timeList = list
+                                adapter.submitList(list.toList())
+                                with(binding) {
+                                    selectorAll.isClickable = true
+                                    expense.isClickable = true
+                                    income.isClickable = true
+                                }
+                            }
+                        }
+                        is ResponseState.Error -> {
+                            myToast(it.errorMessage)
+                        }
+                        is ResponseState.Load -> {
+                            with(binding) {
+                                selectorAll.isClickable = false
+                                expense.isClickable = false
+                                income.isClickable = false
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     override fun init() {
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(context)
+        if (list.isEmpty())
+            viewModel.getTransactions()
     }
 
-    private fun selectIncome(){
-        with(binding){
+    private fun selectIncome() {
+        with(binding) {
             income.setTextColor(Color.WHITE)
             selectorAll.setTextColor(requireContext().getColor(R.color.not_selected))
             expense.setTextColor(requireContext().getColor(R.color.not_selected))
         }
     }
 
-    private fun selectExpense(){
-        with(binding){
+    private fun selectExpense() {
+        with(binding) {
             expense.setTextColor(Color.WHITE)
             selectorAll.setTextColor(requireContext().getColor(R.color.not_selected))
             income.setTextColor(requireContext().getColor(R.color.not_selected))
         }
     }
 
-    private fun selectAll(){
-        with(binding){
+    private fun selectAll() {
+        with(binding) {
             selectorAll.setTextColor(Color.WHITE)
             income.setTextColor(requireContext().getColor(R.color.not_selected))
             expense.setTextColor(requireContext().getColor(R.color.not_selected))
         }
     }
 
-    private fun scrollToTop(){
+    private fun scrollToTop() {
         binding.recycler.postDelayed({
             binding.recycler.smoothScrollToPosition(0)
         }, 300)

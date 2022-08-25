@@ -3,6 +3,7 @@ package com.example.superbank.networking
 import com.example.superbank.cards.Card
 import com.example.superbank.cards.CardTransactions
 import com.example.superbank.cards.UpcomingPayment
+import com.example.superbank.transactions.getmodel.TransactionsGetModel
 import com.example.superbank.transfer.Transaction
 import okhttp3.Interceptor
 import com.example.superbank.transfer.User
@@ -75,4 +76,7 @@ interface ApiService {
 
     @POST(" ")
     suspend fun makeTransfer(@Body body:Transaction): Response<String>
+
+    @POST("7dfc1d37-00c4-44df-95cb-a496f3e03237?fbclid=IwAR0WFm0Qi6sopNKHFG-sfP0w_1Sgcu0uxEZGU7_Tu5_pL2w7pjhRyHbOqwU")
+    suspend fun getTransactions(): Response<List<TransactionsGetModel>>
 }

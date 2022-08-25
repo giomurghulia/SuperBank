@@ -10,6 +10,11 @@ import com.example.superbank.transactions.adapters.diffutils.OuterDiffUtil
 import com.example.superbank.transactions.adapters.models.OuterModel
 
 class OuterAdapter : ListAdapter<OuterModel, OuterAdapter.OuterViewHolder>(OuterDiffUtil()) {
+    private lateinit var clickListener: (title: String, type: String, amount: String, description: String, cardLastDigits: String, date: String) -> Unit
+
+    fun setOnOuterItemClickListener(listener: (title: String, type: String, amount: String, description: String, cardLastDigits: String, date: String) -> Unit) {
+        clickListener = listener
+    }
 
     companion object {
         private const val MARGIN_IN_DP = 20
@@ -41,7 +46,12 @@ class OuterAdapter : ListAdapter<OuterModel, OuterAdapter.OuterViewHolder>(Outer
             with(binding) {
                 date.text = model.time
                 val manager = LinearLayoutManager(binding.root.context)
-                val adapter = InnerAdapter()
+                val adapter = InnerAdapter().apply {
+                    setOnItemClickListener { title: String, type: String, amount: String, description: String, cardLastDigits: String ->
+                        if (this@OuterAdapter::clickListener.isInitialized)
+                            clickListener(title, type, amount, description, cardLastDigits, model.time)
+                    }
+                }
                 innerRecycler.layoutParams = params
                 adapter.submitList(model.transactions)
                 innerRecycler.layoutManager = manager

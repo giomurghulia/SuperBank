@@ -24,4 +24,9 @@
     <string name="to">To</string>
     <string name="iban_or_mobile_number">IBAN Or Mobile Number</string>
     <string name="amount">Amount</string>
+    <string name="transaction_type">Transaction type:</string>
+    <string name="transaction_amount">Transaction amount:</string>
+    <string name="transaction_date">Transaction date:</string>
+    <string name="transaction_description">Transaction description:</string>
+    <string name="transaction_title">Transaction title</string>
 </resources>
