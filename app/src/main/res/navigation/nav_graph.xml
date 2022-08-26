@@ -47,4 +47,8 @@
             android:name="title"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.superbank.profile.ProfileFragment"
+        android:label="ProfileFragment" />
 </navigation>
