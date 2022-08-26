@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.example.superbank.authorized.AuthorizedUserViewModel
 import com.example.superbank.cards.CardsPagerAdapter
 import com.example.superbank.databinding.FragmentTransferBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -24,6 +27,10 @@ class TransferFragment : Fragment() {
     private val viewModel: TransferViewModel by viewModels()
 
     private val cardsAdapter = CardsPagerAdapter()
+
+    private val sharedViewModel: AuthorizedUserViewModel by viewModels(
+        ownerProducer = { requireParentFragment() }
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +45,7 @@ class TransferFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         updateErrorStates()
         updateQuickAmount()
@@ -80,9 +88,13 @@ class TransferFragment : Fragment() {
                     when (it) {
                         is Resource.Success -> {
                             binding.addressFullNameText.text = it.user.fullName
+
+                            clocheKeyboard()
                         }
                         is Resource.Error -> {
                             binding.addressFullNameText.text = it.errorMessage
+
+                            clocheKeyboard()
                         }
                         is Resource.SuccessTransfer -> {
                             successTransfer()
@@ -162,5 +174,10 @@ class TransferFragment : Fragment() {
 
         binding.addressInput.setText("")
         binding.amountInput.setText("")
+    }
+
+    private fun clocheKeyboard(){
+        val controller = WindowCompat.getInsetsController(requireActivity().window, binding.root)
+        controller.hide(WindowInsetsCompat.Type.ime())
     }
 }

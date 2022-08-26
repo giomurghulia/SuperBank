@@ -3,8 +3,10 @@ package com.example.superbank
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI.setupWithNavController
+
 import com.example.superbank.databinding.ActivityMainBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -15,10 +17,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.activity_main_nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
         val navController = navHostFragment.navController
 
-        setupWithNavController(binding.bottomNavigationView, navController)
+
+        val currentUser = Firebase.auth.currentUser
+        if (currentUser != null) {
+            navController.navigate(R.id.authorizedUserFragment)
+        } else {
+            navController.navigate(R.id.guestUserFragment)
+        }
     }
 
 }

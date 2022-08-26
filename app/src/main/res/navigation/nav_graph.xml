@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/CardFragment">
+
     <fragment
         android:id="@+id/CardFragment"
         android:name="com.example.superbank.cards.CardFragment"
@@ -17,6 +18,7 @@
             android:id="@+id/action_transactionFragment_to_transactionInfoFragment"
             app:destination="@id/transactionInfoFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/transferFragment"
         android:name="com.example.superbank.transfer.TransferFragment"

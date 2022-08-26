@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/placeholder">
+
+    <fragment android:id="@+id/placeholder"
+        android:name="androidx.fragment.app.Fragment"/>
+    <fragment
+        android:id="@+id/guestUserFragment"
+        android:name="com.example.superbank.guest.GuestUserFragment"
+        android:label="GuestUserFragment" >
+        <action
+            android:id="@+id/action_guestUserFragment_to_authorizedUserFragment"
+            app:destination="@id/authorizedUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/authorizedUserFragment"
+        android:name="com.example.superbank.authorized.AuthorizedUserFragment"
+        android:label="AuthorizedUserFragment" >
+
+        <action
+            android:id="@+id/action_authorizedUserFragment_to_guestUserFragment"
+            app:destination="@id/guestUserFragment" />
+    </fragment>
+</navigation>
