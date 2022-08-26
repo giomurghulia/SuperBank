@@ -1,5 +1,6 @@
 package com.example.superbank.transactions.adapters
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -41,13 +42,9 @@ class InnerAdapter :
                         )
                 }
                 icon.setImageResource(model.type.icon())
-                tittle.text = model.title
+                icon.backgroundTintList = ColorStateList.valueOf(root.context.getColor(model.type.backgroundTint))
+                title.text = model.title
                 amount.text = if (model.amount > 0) "$${model.amount}" else "-$${-model.amount}"
-                line.setBackgroundColor(
-                    if (position == itemCount - 1) root.context.getColor(R.color.black) else root.context.getColor(
-                        R.color.line_separator
-                    )
-                )
             }
         }
     }

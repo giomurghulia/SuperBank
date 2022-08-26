@@ -28,6 +28,9 @@ class TransactionInfoFragment :
             amount.text = amountString
             date.text = args.date
             description.text = args.description
+            backImage.setOnClickListener{
+                requireActivity().onBackPressed()
+            }
         }
     }
 }

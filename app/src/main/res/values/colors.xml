@@ -10,4 +10,9 @@
     <color name="filter_selector_color">#414A6180</color>
     <color name="line_separator">#585858</color>
     <color name="not_selected">#414A61</color>
+    <color name="transfer_tint_color">#EAF5DC</color>
+    <color name="grocery_tint_color">#FFDEE2</color>
+    <color name="bill_tint_color">#FFE8CE</color>
+    <color name="card_tint_color">#E7DFFF</color>
+    <color name="salary_tint_color">#D3EAFF</color>
 </resources>

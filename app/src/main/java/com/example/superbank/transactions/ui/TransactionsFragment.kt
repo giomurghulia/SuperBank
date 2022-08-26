@@ -1,6 +1,7 @@
 package com.example.superbank.transactions.ui
 
 import android.app.DatePickerDialog
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -58,7 +59,7 @@ class TransactionsFragment :
         }
     }
 
-     private fun listeners() {
+    private fun listeners() {
         with(binding) {
             income.setOnClickListener {
                 var newList: List<OuterModel> = listOf()
@@ -116,11 +117,16 @@ class TransactionsFragment :
                 dpd.datePicker.maxDate = System.currentTimeMillis()
                 dpd.show()
             }
+            refresh.setOnRefreshListener {
+                bindObservers()
+                time.text = getString(R.string.select_time_range)
+                selectorAll.callOnClick()
+            }
         }
 
     }
 
-     private fun bindObservers() {
+    private fun bindObservers() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.transactionsListFlow.collect {
@@ -148,12 +154,13 @@ class TransactionsFragment :
                             }
                         }
                     }
+                    binding.refresh.isRefreshing = false
                 }
             }
         }
     }
 
-     private fun init() {
+    private fun init() {
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(context)
         if (list.isEmpty())
@@ -165,6 +172,13 @@ class TransactionsFragment :
             income.setTextColor(Color.WHITE)
             selectorAll.setTextColor(requireContext().getColor(R.color.not_selected))
             expense.setTextColor(requireContext().getColor(R.color.not_selected))
+
+            income.backgroundTintList =
+                ColorStateList.valueOf(requireContext().getColor(R.color.not_selected))
+            selectorAll.backgroundTintList =
+                ColorStateList.valueOf(requireContext().getColor(R.color.filter_selector_color))
+            expense.backgroundTintList =
+                ColorStateList.valueOf(requireContext().getColor(R.color.filter_selector_color))
         }
     }
 
@@ -173,6 +187,13 @@ class TransactionsFragment :
             expense.setTextColor(Color.WHITE)
             selectorAll.setTextColor(requireContext().getColor(R.color.not_selected))
             income.setTextColor(requireContext().getColor(R.color.not_selected))
+
+            expense.backgroundTintList =
+                ColorStateList.valueOf(requireContext().getColor(R.color.not_selected))
+            income.backgroundTintList =
+                ColorStateList.valueOf(requireContext().getColor(R.color.filter_selector_color))
+            selectorAll.backgroundTintList =
+                ColorStateList.valueOf(requireContext().getColor(R.color.filter_selector_color))
         }
     }
 
@@ -181,6 +202,13 @@ class TransactionsFragment :
             selectorAll.setTextColor(Color.WHITE)
             income.setTextColor(requireContext().getColor(R.color.not_selected))
             expense.setTextColor(requireContext().getColor(R.color.not_selected))
+
+            selectorAll.backgroundTintList =
+                ColorStateList.valueOf(requireContext().getColor(R.color.not_selected))
+            income.backgroundTintList =
+                ColorStateList.valueOf(requireContext().getColor(R.color.filter_selector_color))
+            expense.backgroundTintList =
+                ColorStateList.valueOf(requireContext().getColor(R.color.filter_selector_color))
         }
     }
 

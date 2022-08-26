@@ -1,43 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="100dp"
+    android:gravity="center">
 
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="46dp"
-        android:layout_height="46dp"
-        android:layout_marginVertical="12dp"
-        android:layout_gravity="start|center"
-        android:layout_marginStart="20dp"
-        tools:src="@drawable/ic_shopping_icon"
-        android:background="@drawable/shape_icon_background"
-        android:scaleType="centerInside" />
-
-    <TextView
-        android:id="@+id/tittle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start|center"
-        android:layout_marginStart="72dp"
-        android:textColor="@color/white"
-        android:textSize="12sp" />
+        android:background="@drawable/shape_item_background"
+        android:gravity="center"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="20dp"
+        android:layout_marginVertical="4dp">
 
-    <TextView
-        android:id="@+id/amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|center"
-        android:layout_marginEnd="10dp"
-        android:textColor="@color/white"
-        android:textSize="16sp"/>
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:background="@drawable/shape_icon_background"
+            android:backgroundTint="#FFDEE2"
+            android:scaleType="centerInside"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/ic_shopping_icon" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            tools:text="Grocery" />
+
+        <TextView
+            android:id="@+id/amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            tools:text="100.2" />
+
+    </LinearLayout>
 
     <View
-        android:id="@+id/line"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0dp"
         android:layout_gravity="bottom"
-        android:background="@color/line_separator" />
+        />
 </FrameLayout>
