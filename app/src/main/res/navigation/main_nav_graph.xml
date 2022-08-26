@@ -17,5 +17,10 @@
     <fragment
         android:id="@+id/authorizedUserFragment"
         android:name="com.example.superbank.authorized.AuthorizedUserFragment"
-        android:label="AuthorizedUserFragment" />
+        android:label="AuthorizedUserFragment" >
+
+        <action
+            android:id="@+id/action_authorizedUserFragment_to_guestUserFragment"
+            app:destination="@id/guestUserFragment" />
+    </fragment>
 </navigation>

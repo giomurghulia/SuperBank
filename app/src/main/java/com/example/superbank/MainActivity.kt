@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
         val navController = navHostFragment.navController
 
+
         val currentUser = Firebase.auth.currentUser
         if (currentUser != null) {
             navController.navigate(R.id.authorizedUserFragment)

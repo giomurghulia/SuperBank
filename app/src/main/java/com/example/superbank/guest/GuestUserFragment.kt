@@ -10,8 +10,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.superbank.AuthorizedUser
+import com.example.superbank.authorized.AuthorizedUserViewModel
 import com.example.superbank.databinding.FragmentGuestUserBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -21,6 +24,8 @@ class GuestUserFragment : Fragment() {
     private lateinit var binding: FragmentGuestUserBinding
 
     private val viewModel: GuestUserViewModel by viewModels()
+
+    private val sharedViewModel: AuthorizedUserViewModel by activityViewModels()
 
     private val auth = Firebase.auth
 
@@ -97,6 +102,7 @@ class GuestUserFragment : Fragment() {
                         Toast.LENGTH_SHORT
                     ).show()
 
+                    sharedViewModel.logInUser(AuthorizedUser(user?.uid.toString(),email,null,null,null))
                     findNavController().navigate(
                         GuestUserFragmentDirections.actionGuestUserFragmentToAuthorizedUserFragment()
                     )

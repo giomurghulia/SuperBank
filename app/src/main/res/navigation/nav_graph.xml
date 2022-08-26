@@ -17,4 +17,8 @@
         android:id="@+id/transferFragment"
         android:name="com.example.superbank.transfer.TransferFragment"
         android:label="TransactionFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.superbank.profile.ProfileFragment"
+        android:label="ProfileFragment" />
 </navigation>
