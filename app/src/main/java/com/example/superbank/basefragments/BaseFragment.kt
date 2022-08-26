@@ -5,16 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.viewbinding.ViewBinding
+import com.example.superbank.SharedViewModel
 import com.example.superbank.types.Inflater
 
 abstract class BaseFragment<VB : ViewBinding>(private val inflater: Inflater<VB>) : Fragment() {
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+
     private var _binding: VB? = null
     protected val binding get() = _binding!!
-    abstract fun listeners()
-    abstract fun bindObservers()
-    abstract fun init()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,9 +29,9 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflater: Inflater<VB>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
-        listeners()
-        bindObservers()
+
+        sharedViewModel.checkAuthorizedUser()
+
     }
 
     override fun onDestroy() {

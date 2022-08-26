@@ -11,16 +11,6 @@ import kotlinx.coroutines.flow.asStateFlow
 
 class AuthorizedUserViewModel : ViewModel() {
 
-    private val _authorizedUserData = MutableStateFlow<AuthorizedUser?>(null)
-    val authorizedUserData get() = _authorizedUserData.asStateFlow()
 
-    fun logInUser(user: AuthorizedUser) {
-        _authorizedUserData.value = user
-    }
 
-    fun checkUser() {
-        if (RetrofitClient.token.equals(null)) {
-            _authorizedUserData.value = null
-        }
-    }
 }

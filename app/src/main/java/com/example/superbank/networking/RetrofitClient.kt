@@ -1,5 +1,6 @@
 package com.example.superbank.networking
 
+import com.example.superbank.AuthorizedUser
 import com.example.superbank.cards.Card
 import com.example.superbank.cards.CardTransactions
 import com.example.superbank.cards.UpcomingPayment
@@ -64,6 +65,9 @@ object RetrofitClient {
 }
 
 interface ApiService {
+    @POST("5420dba3-7074-424f-9a18-b6bbfe395e6c")
+    suspend fun getAuthorizedUserDate(): Response<AuthorizedUser>
+
     @POST("1ca0503a-753e-4523-9c63-297f58a5c64d")
     suspend fun getCards(): Response<List<Card>>
 

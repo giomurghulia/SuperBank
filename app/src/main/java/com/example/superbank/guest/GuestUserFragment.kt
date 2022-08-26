@@ -1,8 +1,6 @@
 package com.example.superbank.guest
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
@@ -12,20 +10,24 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.example.superbank.AuthorizedUser
-import com.example.superbank.authorized.AuthorizedUserViewModel
+import com.example.superbank.R
+import com.example.superbank.SharedViewModel
+import com.example.superbank.basefragments.BaseFragment
 import com.example.superbank.databinding.FragmentGuestUserBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 
 class GuestUserFragment : Fragment() {
-
     private lateinit var binding: FragmentGuestUserBinding
 
     private val viewModel: GuestUserViewModel by viewModels()
 
-    private val sharedViewModel: AuthorizedUserViewModel by activityViewModels()
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private val auth = Firebase.auth
 
@@ -62,59 +64,38 @@ class GuestUserFragment : Fragment() {
                 register(email, password)
             }
         }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state.collect {
+                    when (it) {
+                        is Resource.Success -> {
+                            Toast.makeText(context, "signInWithEmail:success", Toast.LENGTH_SHORT)
+                                .show()
+
+                            findNavController().navigate(R.id.action_global_authorizedUserFragment)
+
+                        }
+                        is Resource.Error -> {
+                            Toast.makeText(context, it.errorMessage, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun register(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "createUserWithEmail:success")
-
-                    Toast.makeText(
-                        context, "createUserWithEmail:success",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                    logIn(email, password)
-
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        context, "Authentication failed.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+                viewModel.register(task)
             }
     }
 
     private fun logIn(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithEmail:success")
-                    val user = auth.currentUser
-
-                    Toast.makeText(
-                        context, "signInWithEmail:success",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                    sharedViewModel.logInUser(AuthorizedUser(user?.uid.toString(),email,null,null,null))
-                    findNavController().navigate(
-                        GuestUserFragmentDirections.actionGuestUserFragmentToAuthorizedUserFragment()
-                    )
-
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        context, "Authentication failed.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+                viewModel.login(task)
             }
     }
 

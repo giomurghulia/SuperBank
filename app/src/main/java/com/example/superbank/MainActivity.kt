@@ -2,14 +2,22 @@ package com.example.superbank
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.NavHostFragment
 
 import com.example.superbank.databinding.ActivityMainBinding
+import com.example.superbank.guest.GuestUserViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: SharedViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,10 +31,19 @@ class MainActivity : AppCompatActivity() {
 
 
         val currentUser = Firebase.auth.currentUser
+
         if (currentUser != null) {
-            navController.navigate(R.id.authorizedUserFragment)
+            navController.navigate(R.id.action_global_authorizedUserFragment)
         } else {
-            navController.navigate(R.id.guestUserFragment)
+            navController.navigate(R.id.action_global_guestUserFragment)
+        }
+
+        this.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                viewModel.logOutUser.collect {
+                    navController.navigate(R.id.action_global_guestUserFragment)
+                }
+            }
         }
     }
 

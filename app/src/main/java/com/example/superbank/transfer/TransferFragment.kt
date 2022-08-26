@@ -10,38 +10,30 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.example.superbank.SharedViewModel
 import com.example.superbank.authorized.AuthorizedUserViewModel
+import com.example.superbank.basefragments.BaseFragment
 import com.example.superbank.cards.CardsPagerAdapter
+import com.example.superbank.databinding.FragmentProfileBinding
 import com.example.superbank.databinding.FragmentTransferBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.launch
 
-class TransferFragment : Fragment() {
-    private lateinit var binding: FragmentTransferBinding
+class TransferFragment : BaseFragment<FragmentTransferBinding>(
+    FragmentTransferBinding::inflate
+) {
     private val viewModel: TransferViewModel by viewModels()
 
     private val cardsAdapter = CardsPagerAdapter()
 
-    private val sharedViewModel: AuthorizedUserViewModel by viewModels(
-        ownerProducer = { requireParentFragment() }
-    )
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        super.onCreateView(inflater, container, savedInstanceState)
-
-        binding = FragmentTransferBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -176,7 +168,7 @@ class TransferFragment : Fragment() {
         binding.amountInput.setText("")
     }
 
-    private fun clocheKeyboard(){
+    private fun clocheKeyboard() {
         val controller = WindowCompat.getInsetsController(requireActivity().window, binding.root)
         controller.hide(WindowInsetsCompat.Type.ime())
     }

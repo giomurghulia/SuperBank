@@ -23,11 +23,12 @@
         <entry key="app/src/main/res/drawable/shape_selected_dot.xml" value="0.1645" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.26135310472659873" />
         <entry key="app/src/main/res/layout/fragment_authorized_user.xml" value="0.2453125" />
+        <entry key="app/src/main/res/layout/fragment_cards.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/layout/fragment_guest_user.xml" value="0.22552337646484377" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/fragment_my_cards.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.2453125" />
-        <entry key="app/src/main/res/layout/fragment_transaction_info.xml" value="0.14" />
         <entry key="app/src/main/res/layout/fragment_transactions.xml" value="0.4165497896213184" />
         <entry key="app/src/main/res/layout/fragment_transfer.xml" value="0.2318267822265625" />
         <entry key="app/src/main/res/layout/inner_recycler_item.xml" value="0.48781882894163764" />

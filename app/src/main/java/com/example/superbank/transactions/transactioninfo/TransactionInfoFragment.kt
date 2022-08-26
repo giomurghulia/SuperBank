@@ -1,6 +1,8 @@
 package com.example.superbank.transactions.transactioninfo
 
 
+import android.os.Bundle
+import android.view.View
 import androidx.navigation.fragment.navArgs
 import com.example.superbank.basefragments.BaseFragment
 import com.example.superbank.databinding.FragmentTransactionInfoBinding
@@ -10,11 +12,12 @@ class TransactionInfoFragment :
     BaseFragment<FragmentTransactionInfoBinding>(FragmentTransactionInfoBinding::inflate) {
     private val args: TransactionInfoFragmentArgs by navArgs()
 
-    override fun listeners() {}
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        init()
+    }
 
-    override fun bindObservers() {}
-
-    override fun init() {
+    private fun init() {
         with(binding) {
             val card = "$COVERED_PART_OR_CARD${args.cardLastNumbers}"
             carNumberText.text = card

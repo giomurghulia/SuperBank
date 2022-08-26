@@ -4,23 +4,29 @@
     android:id="@+id/main_nav_graph"
     app:startDestination="@id/placeholder">
 
-    <fragment android:id="@+id/placeholder"
-        android:name="androidx.fragment.app.Fragment"/>
+    <fragment
+        android:id="@+id/placeholder"
+        android:name="androidx.fragment.app.Fragment" />
+
     <fragment
         android:id="@+id/guestUserFragment"
         android:name="com.example.superbank.guest.GuestUserFragment"
-        android:label="GuestUserFragment" >
-        <action
-            android:id="@+id/action_guestUserFragment_to_authorizedUserFragment"
-            app:destination="@id/authorizedUserFragment" />
-    </fragment>
+        android:label="GuestUserFragment" />
+
     <fragment
         android:id="@+id/authorizedUserFragment"
         android:name="com.example.superbank.authorized.AuthorizedUserFragment"
-        android:label="AuthorizedUserFragment" >
+        android:label="AuthorizedUserFragment" />
 
-        <action
-            android:id="@+id/action_authorizedUserFragment_to_guestUserFragment"
-            app:destination="@id/guestUserFragment" />
-    </fragment>
+    <action
+        android:id="@+id/action_global_authorizedUserFragment"
+        app:destination="@id/authorizedUserFragment"
+        app:popUpTo="@id/main_nav_graph"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/action_global_guestUserFragment"
+        app:destination="@id/guestUserFragment"
+        app:popUpTo="@id/main_nav_graph"
+        app:popUpToInclusive="true" />
 </navigation>

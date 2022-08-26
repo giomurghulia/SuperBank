@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/CardFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/CardFragment"
@@ -13,7 +13,7 @@
     <fragment
         android:id="@+id/transactionFragment"
         android:name="com.example.superbank.transactions.ui.TransactionsFragment"
-        android:label="TransactionFragment" >
+        android:label="TransactionFragment">
         <action
             android:id="@+id/action_transactionFragment_to_transactionInfoFragment"
             app:destination="@id/transactionInfoFragment" />
@@ -27,7 +27,7 @@
         android:id="@+id/transactionInfoFragment"
         android:name="com.example.superbank.transactions.transactioninfo.TransactionInfoFragment"
         android:label="fragment_transaction_info"
-        tools:layout="@layout/fragment_transaction_info" >
+        tools:layout="@layout/fragment_transaction_info">
         <argument
             android:name="type"
             app:argType="string" />
@@ -51,4 +51,8 @@
         android:id="@+id/profileFragment"
         android:name="com.example.superbank.profile.ProfileFragment"
         android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.superbank.home.HomeFragment"
+        android:label="HomeFragment" />
 </navigation>

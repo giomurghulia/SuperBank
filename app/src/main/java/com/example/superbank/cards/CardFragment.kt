@@ -2,10 +2,7 @@ package com.example.superbank.cards
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -13,28 +10,20 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
-import com.example.superbank.databinding.FragmentMyCardsBinding
+import com.example.superbank.basefragments.BaseFragment
+import com.example.superbank.databinding.FragmentCardsBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.launch
 
-class CardFragment : Fragment() {
-    private lateinit var binding: FragmentMyCardsBinding
+class CardFragment : BaseFragment<FragmentCardsBinding>(
+    FragmentCardsBinding::inflate
+) {
 
     private val viewModel: CardViewModel by viewModels()
 
     private val cardsAdapter = CardsPagerAdapter()
     private val cardDescriptionAdapter = CardDescriptionAdapter()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        super.onCreateView(inflater, container, savedInstanceState)
-
-        binding = FragmentMyCardsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -93,7 +82,7 @@ class CardFragment : Fragment() {
         })
     }
 
-    private fun makeAlertDialog(alert:String) {
+    private fun makeAlertDialog(alert: String) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Super Bank")
         builder.setMessage(alert)
