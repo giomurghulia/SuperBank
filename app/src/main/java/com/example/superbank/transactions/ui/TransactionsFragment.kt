@@ -18,6 +18,7 @@ import com.example.superbank.transactions.adapters.OuterAdapter
 import com.example.superbank.transactions.adapters.models.OuterModel
 import com.example.superbank.transactions.getmodel.toOuterList
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -205,6 +206,10 @@ class TransactionsFragment :
     }
 
     private fun scrollToTop() {
-        binding.recycler.smoothScrollToPosition(0)
+        lifecycleScope.launch(Dispatchers.Default){
+            delay(300)
+        }.invokeOnCompletion {
+            binding.recycler.smoothScrollToPosition(0)
+        }
     }
 }
