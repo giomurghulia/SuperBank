@@ -76,6 +76,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 }
             }
         }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.balance.collect {
+                    binding.amountText.text = "$$it"
+                }
+            }
+        }
 
         adapter.setCallBack(object : MainAdapter.CallBack {
             override fun onItemClick(action: HomeActionEnum) {

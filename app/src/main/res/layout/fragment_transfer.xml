@@ -128,7 +128,7 @@
                 android:background="@drawable/shape_input"
                 android:drawablePadding="20dp"
                 android:hint=""
-                android:inputType="number" />
+                android:inputType="number|numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton

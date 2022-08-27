@@ -18,33 +18,15 @@ class HomeViewModel : ViewModel() {
     private val _listItems = MutableStateFlow<List<HomeListItem>>(emptyList())
     val listItems get() = _listItems.asStateFlow()
 
+    private val _balance = MutableStateFlow<String>("0.00")
+    val balance get() = _balance.asStateFlow()
+
     private val _action = MutableSharedFlow<HomeActionEnum>(
         replay = 0,
         extraBufferCapacity = 1,
         onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
     val action get() = _action.asSharedFlow()
-
-    fun getTransactionsAndCard() {
-        viewModelScope.launch {
-            var cards: List<Card>? = null
-            var transactions: List<TransactionsGetModel>? = null
-
-            val responseTransactions = RetrofitClient.apiService.getTransactions()
-
-            if (responseTransactions.isSuccessful) {
-                transactions = responseTransactions.body()
-            }
-
-            val response = RetrofitClient.apiService.getCards()
-
-            if (response.isSuccessful) {
-                cards = response.body()
-            }
-
-            buildListItem(cards, transactions)
-        }
-    }
 
     private fun buildListItem(
         cards: List<Card>?,
@@ -74,6 +56,37 @@ class HomeViewModel : ViewModel() {
             }
         }
         _listItems.value = items
+    }
+
+    private fun setBalance(cards: List<Card>?) {
+        var balance: Double = 0.0
+        cards?.forEach {
+            balance += it.cardBalance
+        }
+
+        _balance.tryEmit(balance.toString())
+    }
+
+    fun getTransactionsAndCard() {
+        viewModelScope.launch {
+            var cards: List<Card>? = null
+            var transactions: List<TransactionsGetModel>? = null
+
+            val responseTransactions = RetrofitClient.apiService.getTransactions()
+
+            if (responseTransactions.isSuccessful) {
+                transactions = responseTransactions.body()
+            }
+
+            val response = RetrofitClient.apiService.getCards()
+
+            if (response.isSuccessful) {
+                cards = response.body()
+                setBalance(cards)
+            }
+
+            buildListItem(cards, transactions)
+        }
     }
 
     fun homeAction(action: HomeActionEnum) {
