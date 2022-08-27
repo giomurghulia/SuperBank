@@ -78,7 +78,7 @@ class CardFragment : BaseFragment<FragmentCardsBinding>(
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.action.collect {
-                    findNavController().navigate(CardFragmentDirections.actionGlobalTransferFragment())
+                    findNavController().navigate(CardFragmentDirections.actionGlobalTransactionFragment())
                 }
             }
         }
