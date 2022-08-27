@@ -46,7 +46,7 @@ class TransactionsFragment :
             submitList(list)
             setOnOuterItemClickListener { title: String, type: String, amount: String, description: String, cardLastDigits: String, date: String ->
                 findNavController().navigate(
-                    TransactionsFragmentDirections.actionTransactionFragmentToTransactionInfoFragment(
+                    TransactionsFragmentDirections.actionGlobalTransactionInfoFragment(
                         type,
                         amount,
                         date,

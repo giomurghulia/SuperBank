@@ -3,20 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginVertical="4dp"
     android:background="@drawable/shape_item_background"
     android:gravity="center"
-    android:paddingVertical="12dp"
     android:paddingHorizontal="20dp"
-    android:layout_marginVertical="4dp">
+    android:paddingVertical="12dp">
 
     <ImageView
         android:id="@+id/icon_image"
         android:layout_width="46dp"
         android:layout_height="46dp"
+        android:layout_marginEnd="12dp"
         android:background="@drawable/shape_icon_background"
         android:backgroundTint="#FFDEE2"
         android:scaleType="centerInside"
-        android:layout_marginEnd="12dp"
         android:src="@drawable/ic_shopping_icon" />
 
     <TextView
@@ -25,10 +25,11 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textColor="@color/white"
-        android:textSize="12sp"
+        android:textSize="16sp"
         tools:text="Grocery" />
 
     <TextView
+        android:id="@+id/numType_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/minus"

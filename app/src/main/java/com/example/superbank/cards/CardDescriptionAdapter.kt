@@ -75,7 +75,7 @@ class CardDescriptionAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind() {
-            binding.cardInfoLayout.setOnClickListener{
+            binding.cardInfoLayout.setOnClickListener {
                 callBack?.onItemClick(QuickActionEnum.CARD_INFO)
             }
             binding.changePinLayout.setOnClickListener {
@@ -100,6 +100,10 @@ class CardDescriptionAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CardDescriptionListItem.ItemHeaderItem) {
             binding.titleText.text = item.title
+
+            binding.actionTitle.setOnClickListener {
+                callBack?.onItemClick(QuickActionEnum.All_TRANSACTION)
+            }
         }
     }
 

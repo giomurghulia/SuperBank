@@ -36,4 +36,6 @@
     <string name="phone_number">Phone Number:</string>
     <string name="profile_image">Profile Image</string>
     <string name="change_email">Change Email</string>
+    <string name="view_all">View All</string>
+    <string name="currency">Currency</string>
 </resources>
