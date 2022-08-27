@@ -28,7 +28,8 @@
         <entry key="app/src/main/res/layout/fragment_guest_user.xml" value="0.22552337646484377" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/fragment_my_cards.xml" value="0.2453125" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.2453125" />
+        <entry key="app/src/main/res/layout/fragment_offers.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.17" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/fragment_transaction_info.xml" value="0.14" />
         <entry key="app/src/main/res/layout/fragment_transactions.xml" value="0.18564102564102564" />
@@ -40,6 +41,7 @@
         <entry key="app/src/main/res/layout/layout_item_header.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/layout_quick_action.xml" value="0.3263748168945313" />
         <entry key="app/src/main/res/layout/layout_upcoming_payment.xml" value="0.2477696736653645" />
+        <entry key="app/src/main/res/layout/offer_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/outer_recycler_item.xml" value="0.25" />
         <entry key="app/src/main/res/menu/my_menu.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1705" />

@@ -33,7 +33,7 @@ class TransferFragment : BaseFragment<FragmentTransferBinding>(
 
     private val cardsAdapter = CardsPagerAdapter()
 
-    private val sharedViewModel: SharedViewModel by activityViewModels()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -13,7 +13,7 @@ import com.example.superbank.SharedViewModel
 import com.example.superbank.types.Inflater
 
 abstract class BaseFragment<VB : ViewBinding>(private val inflater: Inflater<VB>) : Fragment() {
-    private val sharedViewModel: SharedViewModel by activityViewModels()
+    val sharedViewModel: SharedViewModel by activityViewModels()
 
     private var _binding: VB? = null
     protected val binding get() = _binding!!
