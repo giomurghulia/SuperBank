@@ -30,4 +30,10 @@
     <string name="transaction_description">Transaction description:</string>
     <string name="transaction_title">Transaction title:</string>
     <string name="offers">Offers</string>
+    <string name="log_out">Log Out</string>
+    <string name="full_name">Full Name:</string>
+    <string name="email">Email:</string>
+    <string name="phone_number">Phone Number:</string>
+    <string name="profile_image">Profile Image</string>
+    <string name="change_email">Change Email</string>
 </resources>

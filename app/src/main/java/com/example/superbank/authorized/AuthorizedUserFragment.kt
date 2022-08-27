@@ -32,7 +32,6 @@ import kotlinx.coroutines.launch
 class AuthorizedUserFragment : BaseFragment<FragmentAuthorizedUserBinding>(
     FragmentAuthorizedUserBinding::inflate
 ) {
-    private val sharedViewModel: SharedViewModel by activityViewModels()
     private val viewModel: AuthorizedUserViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
