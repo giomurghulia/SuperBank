@@ -15,4 +15,5 @@
     <color name="bill_tint_color">#FFE8CE</color>
     <color name="card_tint_color">#E7DFFF</color>
     <color name="salary_tint_color">#D3EAFF</color>
+    <color name="light_blue">#414A61</color>
 </resources>

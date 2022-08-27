@@ -26,6 +26,14 @@ class CardViewModel : ViewModel() {
     )
     val alertDialog get() = _alertDialog.asSharedFlow()
 
+    private val _action = MutableSharedFlow<Unit>(
+        replay = 0,
+        extraBufferCapacity = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
+    val action get() = _action.asSharedFlow()
+
+
     private var myCards = listOf<Card>()
 
     fun getCards() {
@@ -115,6 +123,9 @@ class CardViewModel : ViewModel() {
             }
             QuickActionEnum.REMOVE_CARD -> {
                 _alertDialog.tryEmit("Card will remove soon, You will receive sms")
+            }
+            QuickActionEnum.All_TRANSACTION -> {
+                _action.tryEmit(Unit)
             }
         }
     }
