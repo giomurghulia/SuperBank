@@ -29,9 +29,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     private val adapter = MainAdapter()
 
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun init() {
         activity?.window?.statusBarColor =
             ContextCompat.getColor(requireContext(), R.color.light_blue)
 

@@ -32,9 +32,7 @@ class CardFragment : BaseFragment<FragmentCardsBinding>(
         binding.mainRecycler.smoothScrollToPosition(0)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun init() {
         viewModel.getCards()
 
         binding.cardViewpager.adapter = cardsAdapter

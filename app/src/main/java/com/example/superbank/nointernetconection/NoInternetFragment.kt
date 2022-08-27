@@ -1,6 +1,8 @@
 package com.example.superbank.nointernetconection
 
 import android.content.Intent
+import android.os.Bundle
+import android.view.View
 import com.example.superbank.basefragments.BaseFragment
 import com.example.superbank.databinding.FragmentNoInternetBinding
 import com.google.firebase.auth.ktx.auth
@@ -15,7 +17,8 @@ class NoInternetFragment :
         }
     }
 
-    override fun listeners() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.tryAgain.setOnClickListener {
             restart()
         }
@@ -24,7 +27,8 @@ class NoInternetFragment :
             sharedViewModel.logOutUser()
         }
     }
-    private fun restart(){
+
+    private fun restart() {
         val intent = requireActivity().intent
         intent.addFlags(
             Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK

@@ -57,12 +57,17 @@ class SharedViewModel : ViewModel() {
 
     fun getAuthorizedUserDate() {
         viewModelScope.launch {
+            try{
             val response = RetrofitClient.apiService.getAuthorizedUserDate()
             val user = response.body()
 
             val authorizedUser = Firebase.auth.currentUser?.email?.let { user?.copy(email = it) }
 
             _authorizedUserData.value = authorizedUser
+        }catch (e: Exception){
+
+        }
+
         }
     }
 

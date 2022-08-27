@@ -36,10 +36,7 @@ class AuthorizedUserFragment : BaseFragment<FragmentAuthorizedUserBinding>(
 ) {
     private val viewModel: AuthorizedUserViewModel by viewModels()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
+    override fun init() {
         val navHostFragment =
             childFragmentManager.findFragmentById(R.id.authorized_nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController

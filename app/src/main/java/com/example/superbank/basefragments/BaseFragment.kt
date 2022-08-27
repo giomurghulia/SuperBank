@@ -44,12 +44,13 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflater: Inflater<VB>
         super.onViewCreated(view, savedInstanceState)
         if (isOnline()) {
             sharedViewModel.checkAuthorizedUser()
+            init()
+            listeners()
+            bindObservers()
         } else {
             sharedViewModel.onNoInternet()
         }
-        init()
-        listeners()
-        bindObservers()
+
 
     }
 
