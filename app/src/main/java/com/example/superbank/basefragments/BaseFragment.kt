@@ -38,15 +38,15 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflater: Inflater<VB>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (isOnline())
+        if (isOnline()) {
             sharedViewModel.checkAuthorizedUser()
-        else {
+        } else {
             sharedViewModel.onNoInternet()
-            return
         }
         init()
-        listeners()
         bindObservers()
+        listeners()
+
     }
 
     override fun onDestroy() {
