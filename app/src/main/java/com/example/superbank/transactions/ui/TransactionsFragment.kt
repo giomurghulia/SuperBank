@@ -3,8 +3,6 @@ package com.example.superbank.transactions.ui
 import android.app.DatePickerDialog
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -33,13 +31,6 @@ class TransactionsFragment :
     private var timeList: List<OuterModel> = list
     private val viewModel: TransactionsViewModel by viewModels()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        init()
-        listeners()
-        bindObservers()
-    }
 
     private val adapter by lazy {
         OuterAdapter().apply {
@@ -59,7 +50,7 @@ class TransactionsFragment :
         }
     }
 
-    private fun listeners() {
+    override fun listeners() {
         with(binding) {
             income.setOnClickListener {
                 var newList: List<OuterModel> = listOf()
@@ -126,7 +117,7 @@ class TransactionsFragment :
 
     }
 
-    private fun bindObservers() {
+    override fun bindObservers() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.transactionsListFlow.collect {
@@ -160,7 +151,7 @@ class TransactionsFragment :
         }
     }
 
-    private fun init() {
+    override fun init() {
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(context)
         if (list.isEmpty())

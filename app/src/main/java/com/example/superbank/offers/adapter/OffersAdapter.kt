@@ -29,9 +29,9 @@ class OffersAdapter : ListAdapter<OfferModel, OffersAdapter.OfferViewHolder>(Off
                 tittle.text = model.title
                 image.setOnClickListener {
                     val url =
-                        if (!model.link.startsWith("http://") && !model.link.startsWith("https://"))
-                            "http://${model.link}"
-                        else model.link
+                        if (!model.url.startsWith("http://") && !model.url.startsWith("https://"))
+                            "http://${model.url}"
+                        else model.url
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                     it.context.startActivity(intent)
                 }

@@ -12,12 +12,8 @@ class TransactionInfoFragment :
     BaseFragment<FragmentTransactionInfoBinding>(FragmentTransactionInfoBinding::inflate) {
     private val args: TransactionInfoFragmentArgs by navArgs()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        init()
-    }
 
-    private fun init() {
+    override fun init() {
         with(binding) {
             val card = "$COVERED_PART_OR_CARD${args.cardLastNumbers}"
             carNumberText.text = card
@@ -28,7 +24,7 @@ class TransactionInfoFragment :
             amount.text = amountString
             date.text = args.date
             description.text = args.description
-            backImage.setOnClickListener{
+            backImage.setOnClickListener {
                 requireActivity().onBackPressed()
             }
         }

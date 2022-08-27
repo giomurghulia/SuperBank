@@ -4,6 +4,7 @@ import com.example.superbank.AuthorizedUser
 import com.example.superbank.cards.Card
 import com.example.superbank.cards.CardTransactions
 import com.example.superbank.cards.UpcomingPayment
+import com.example.superbank.offers.adapter.OfferModel
 import com.example.superbank.transactions.getmodel.TransactionsGetModel
 import com.example.superbank.transfer.Transaction
 import okhttp3.Interceptor
@@ -16,6 +17,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 
@@ -88,4 +90,7 @@ interface ApiService {
 
     @POST("7dfc1d37-00c4-44df-95cb-a496f3e03237?fbclid=IwAR0WFm0Qi6sopNKHFG-sfP0w_1Sgcu0uxEZGU7_Tu5_pL2w7pjhRyHbOqwU")
     suspend fun getTransactions(): Response<List<TransactionsGetModel>>
+
+    @GET("bb3c6da5-2c18-42b4-98f9-d455ad89759f?fbclid=IwAR0fDWdRs2fpN0HY6yC0ezpiJ8MzT9p7F09VGFPVTwbmIie-vrnYPZcck1g")
+    suspend fun getOffers(): Response<List<OfferModel>>
 }

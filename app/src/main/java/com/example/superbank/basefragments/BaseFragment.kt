@@ -18,6 +18,9 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflater: Inflater<VB>
     private var _binding: VB? = null
     protected val binding get() = _binding!!
 
+    open fun init(){}
+    open fun listeners(){}
+    open fun bindObservers(){}
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,6 +34,9 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflater: Inflater<VB>
         super.onViewCreated(view, savedInstanceState)
 
         sharedViewModel.checkAuthorizedUser()
+        init()
+        listeners()
+        bindObservers()
 
     }
 
