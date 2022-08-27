@@ -44,7 +44,8 @@ class CardViewModel : ViewModel() {
                         getUpcomingPaymentAndTransactions(selectedCard)
                     }
                 }
-            }catch (e: Exception){}
+            } catch (e: Exception) {
+            }
         }
     }
 
@@ -57,24 +58,25 @@ class CardViewModel : ViewModel() {
         viewModelScope.launch {
             var upcomingPayment: UpcomingPayment? = null
             var transactions: List<CardTransactions>? = null
+            try {
+                if (cardPosition != 1) {
+                    val responseUpcomingPayment =
+                        RetrofitClient.apiService.getUpcomingPayment(myCards[cardPosition].uniqueId)
 
-            if (cardPosition != 1) {
-                val responseUpcomingPayment =
-                    RetrofitClient.apiService.getUpcomingPayment(myCards[cardPosition].uniqueId)
-
-                if (responseUpcomingPayment.isSuccessful) {
-                    upcomingPayment = responseUpcomingPayment.body()
+                    if (responseUpcomingPayment.isSuccessful) {
+                        upcomingPayment = responseUpcomingPayment.body()
+                    }
                 }
-            }
 
-            val responseTransactions =
-                RetrofitClient.apiService.getCardTransactions(myCards[cardPosition].uniqueId)
+                val responseTransactions =
+                    RetrofitClient.apiService.getCardTransactions(myCards[cardPosition].uniqueId)
 
-            if (responseTransactions.isSuccessful) {
-                transactions = responseTransactions.body()
-            }
+                if (responseTransactions.isSuccessful) {
+                    transactions = responseTransactions.body()
+                }
 
-            buildListItem(upcomingPayment, transactions, CardDescriptionListItem.QuickAction)
+                buildListItem(upcomingPayment, transactions, CardDescriptionListItem.QuickAction)
+            }catch (e: Exception){}
         }
     }
 
