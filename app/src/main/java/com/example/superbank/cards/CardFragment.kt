@@ -2,6 +2,7 @@ package com.example.superbank.cards
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -25,6 +26,10 @@ class CardFragment : BaseFragment<FragmentCardsBinding>(
     private val cardsAdapter = CardsPagerAdapter()
     private val cardDescriptionAdapter = CardDescriptionAdapter()
 
+    private val handler = Handler()
+    private val recyclerScrollRunnable = Runnable {
+        binding.mainRecycler.smoothScrollToPosition(0)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,9 +67,7 @@ class CardFragment : BaseFragment<FragmentCardsBinding>(
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.listItems.collect {
                     cardDescriptionAdapter.submitList(it)
-                    binding.mainRecycler.postDelayed({
-                        binding.mainRecycler.smoothScrollToPosition(0)
-                    }, 300)
+                    handler.postDelayed(recyclerScrollRunnable, 300)
                 }
             }
         }
@@ -88,6 +91,11 @@ class CardFragment : BaseFragment<FragmentCardsBinding>(
                 viewModel.onItemClick(itemId)
             }
         })
+    }
+
+    override fun onDestroyView() {
+        handler.removeCallbacks(recyclerScrollRunnable)
+        super.onDestroyView()
     }
 
     private fun makeAlertDialog(alert: String) {

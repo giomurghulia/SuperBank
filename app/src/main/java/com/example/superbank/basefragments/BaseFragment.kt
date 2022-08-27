@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.viewbinding.ViewBinding
+import com.example.superbank.R
 import com.example.superbank.SharedViewModel
 import com.example.superbank.types.Inflater
 
@@ -23,6 +25,8 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflater: Inflater<VB>
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.black)
+
         _binding = this.inflater.invoke(inflater, container, false)
         return binding.root
     }
