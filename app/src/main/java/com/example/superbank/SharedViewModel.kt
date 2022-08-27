@@ -24,8 +24,12 @@ class SharedViewModel : ViewModel() {
     )
     private val _noInternet = MutableStateFlow<Int>(0)
 
+    private val _isNotLoaded = MutableStateFlow(true)
+
     val logOutUser get() = _logOutUser.asSharedFlow()
-    val noInternet get() = _noInternet.asSharedFlow()
+    val noInternet get() = _noInternet.asStateFlow()
+    val isNotLoaded get() = _isNotLoaded.asStateFlow()
+
 
     private val _action = MutableSharedFlow<HomeActionEnum>(
         replay = 0,
@@ -36,7 +40,7 @@ class SharedViewModel : ViewModel() {
 
 
     fun checkAuthorizedUser() {
-        Firebase.auth.currentUser?.reload()?.addOnCompleteListener{
+        Firebase.auth.currentUser?.reload()?.addOnCompleteListener {
             val currentUser = Firebase.auth.currentUser
 
             if (currentUser == null) {
@@ -50,24 +54,25 @@ class SharedViewModel : ViewModel() {
         _authorizedUserData.value = null
     }
 
-    fun onNoInternet(){
+    fun onNoInternet() {
         _noInternet.tryEmit(1)
     }
 
 
     fun getAuthorizedUserDate() {
         viewModelScope.launch {
-            try{
-            val response = RetrofitClient.apiService.getAuthorizedUserDate()
-            val user = response.body()
+            try {
+                val response = RetrofitClient.apiService.getAuthorizedUserDate()
+                val user = response.body()
 
-            val authorizedUser = Firebase.auth.currentUser?.email?.let { user?.copy(email = it) }
+                val authorizedUser =
+                    Firebase.auth.currentUser?.email?.let { user?.copy(email = it) }
 
-            _authorizedUserData.value = authorizedUser
-        }catch (e: Exception){
+                _authorizedUserData.value = authorizedUser
+            } catch (e: Exception) {
 
-        }
-
+            }
+            _isNotLoaded.value = false
         }
     }
 
