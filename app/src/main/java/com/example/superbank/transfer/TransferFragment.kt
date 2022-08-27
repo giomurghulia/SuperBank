@@ -74,6 +74,10 @@ class TransferFragment : BaseFragment<FragmentTransferBinding>(
             }
         }
 
+        binding.backImage.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.transfer.collect {

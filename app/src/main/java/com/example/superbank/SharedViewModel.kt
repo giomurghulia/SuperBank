@@ -2,6 +2,7 @@ package com.example.superbank
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.superbank.home.HomeActionEnum
 import com.example.superbank.networking.RetrofitClient
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -23,9 +24,16 @@ class SharedViewModel : ViewModel() {
     )
     val logOutUser get() = _logOutUser.asSharedFlow()
 
+    private val _action = MutableSharedFlow<HomeActionEnum>(
+        replay = 0,
+        extraBufferCapacity = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
+    val action get() = _action.asSharedFlow()
+
 
     fun checkAuthorizedUser() {
-        Firebase.auth.currentUser?.reload()?.addOnCompleteListener{
+        Firebase.auth.currentUser?.reload()?.addOnCompleteListener {
             val currentUser = Firebase.auth.currentUser
 
             if (currentUser == null) {
@@ -48,5 +56,9 @@ class SharedViewModel : ViewModel() {
 
             _authorizedUserData.value = authorizedUser
         }
+    }
+
+    fun homeAction(action: HomeActionEnum) {
+        _action.tryEmit(action)
     }
 }

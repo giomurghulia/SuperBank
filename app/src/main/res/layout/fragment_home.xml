@@ -1,27 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="#414A61">
 
     <TextView
-        android:id="@+id/a"
-        android:layout_width="match_parent"
+        android:id="@+id/goodMorning_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="gio" />
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:text="Good Morning"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/b"
-        android:layout_width="match_parent"
+        android:id="@+id/fullName_text"
+        android:layout_marginStart="20dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        tools:text="email" />
+        android:layout_marginTop="8dp"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/goodMorning_text"
+        tools:text="Girogi Murghulia" />
 
     <ImageView
-        android:id="@+id/c"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:layout_marginTop="10dp" />
+        android:id="@+id/avatar_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_visa"
+        android:scaleType="centerInside"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/amount_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/fullName_text"
+        tools:text="$500.00" />
+
+    <TextView
+        android:id="@+id/availableBalance_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Available Balance"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/amount_text" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:paddingTop="20dp"
+        android:id="@+id/mainRecycler"
+        android:paddingHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/shape_background_home_recycler"
+        app:layout_constraintTop_toBottomOf="@id/availableBalance_text" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,16 +2,19 @@ package com.example.superbank.cards
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.example.superbank.basefragments.BaseFragment
 import com.example.superbank.databinding.FragmentCardsBinding
+import com.example.superbank.home.HomeActionEnum
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.launch
 
@@ -24,6 +27,10 @@ class CardFragment : BaseFragment<FragmentCardsBinding>(
     private val cardsAdapter = CardsPagerAdapter()
     private val cardDescriptionAdapter = CardDescriptionAdapter()
 
+    private val handler = Handler()
+    private val recyclerScrollRunnable = Runnable {
+        binding.mainRecycler.smoothScrollToPosition(0)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,9 +68,7 @@ class CardFragment : BaseFragment<FragmentCardsBinding>(
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.listItems.collect {
                     cardDescriptionAdapter.submitList(it)
-                    binding.mainRecycler.postDelayed({
-                        binding.mainRecycler.smoothScrollToPosition(0)
-                    }, 300)
+                    handler.postDelayed(recyclerScrollRunnable, 300)
                 }
             }
         }
@@ -74,12 +79,24 @@ class CardFragment : BaseFragment<FragmentCardsBinding>(
                 }
             }
         }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.action.collect {
+                    sharedViewModel.homeAction(HomeActionEnum.ALL_TRANSACTION)
+                }
+            }
+        }
 
         cardDescriptionAdapter.setCallBack(object : CardDescriptionAdapter.CallBack {
             override fun onItemClick(itemId: QuickActionEnum) {
                 viewModel.onItemClick(itemId)
             }
         })
+    }
+
+    override fun onDestroyView() {
+        handler.removeCallbacks(recyclerScrollRunnable)
+        super.onDestroyView()
     }
 
     private fun makeAlertDialog(alert: String) {
