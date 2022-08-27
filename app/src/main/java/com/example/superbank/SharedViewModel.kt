@@ -23,9 +23,10 @@ class SharedViewModel : ViewModel() {
         onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
     private val _noInternet = MutableStateFlow<Int>(0)
+    val noInternet get() = _noInternet.asSharedFlow()
+
 
     val logOutUser get() = _logOutUser.asSharedFlow()
-    val noInternet get() = _noInternet.asSharedFlow()
 
     private val _action = MutableSharedFlow<HomeActionEnum>(
         replay = 0,

@@ -35,11 +35,8 @@
         <entry key="app/src/main/res/layout/fragment_my_cards.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/fragment_offers.xml" value="0.28177083333333336" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.2453125" />
-        <entry key="app/src/main/res/layout/fragment_no_internet.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/fragment_offers.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.17" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.2453125" />
-        <entry key="app/src/main/res/layout/fragment_transactions.xml" value="0.4165497896213184" />
+        <entry key="app/src/main/res/layout/fragment_transactions.xml" value="0.19667063923069336" />
         <entry key="app/src/main/res/layout/fragment_transfer.xml" value="0.2318267822265625" />
         <entry key="app/src/main/res/layout/inner_recycler_item.xml" value="0.48781882894163764" />
         <entry key="app/src/main/res/layout/layout_card.xml" value="0.16940289367473005" />
