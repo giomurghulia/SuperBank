@@ -29,4 +29,5 @@
     <string name="transaction_date">Transaction date:</string>
     <string name="transaction_description">Transaction description:</string>
     <string name="transaction_title">Transaction title:</string>
+    <string name="offers">Offers</string>
 </resources>

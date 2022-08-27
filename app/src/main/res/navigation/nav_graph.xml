@@ -55,4 +55,9 @@
         android:id="@+id/homeFragment"
         android:name="com.example.superbank.home.HomeFragment"
         android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/offersFragment"
+        android:name="com.example.superbank.offers.OffersFragment"
+        android:label="fragment_offers"
+        tools:layout="@layout/fragment_offers" />
 </navigation>

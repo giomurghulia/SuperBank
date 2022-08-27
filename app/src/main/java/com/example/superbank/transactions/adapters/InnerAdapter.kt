@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.superbank.R
 import com.example.superbank.databinding.InnerRecyclerItemBinding
 import com.example.superbank.transactions.adapters.diffutils.InnerDiffUtil
 import com.example.superbank.transactions.adapters.models.InnerModel
