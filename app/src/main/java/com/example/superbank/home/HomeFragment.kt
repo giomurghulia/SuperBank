@@ -32,7 +32,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        activity?.window?.statusBarColor= ContextCompat.getColor(requireContext(), R.color.light_blue)
+        activity?.window?.statusBarColor =
+            ContextCompat.getColor(requireContext(), R.color.light_blue)
 
         sharedViewModel.checkAuthorizedUser()
         viewModel.getTransactionsAndCard()
@@ -46,6 +47,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                         .with(binding.root.context)
                         .load(it?.avatar)
                         .centerInside()
+                        .circleCrop()
                         .into(binding.avatarImage);
                 }
             }
@@ -62,19 +64,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 viewModel.action.collect {
                     when (it) {
                         HomeActionEnum.TRANSFER -> {
-                            findNavController().navigate(HomeFragmentDirections.actionGlobalTransferFragment())
+                            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToTransferFragment())
                         }
                         HomeActionEnum.OFFER -> {
-                            findNavController().navigate(HomeFragmentDirections.actionGlobalOffersFragment())
+                            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToOffersFragment())
                         }
                         HomeActionEnum.CURRENCY -> {
                         }
-                        HomeActionEnum.ALL_CARD -> {
-                            findNavController().navigate(HomeFragmentDirections.actionGlobalCardFragment())
-                        }
-                        HomeActionEnum.ALL_TRANSACTION -> {
-                            findNavController().navigate(HomeFragmentDirections.actionGlobalTransactionFragment())
-                        }
+                        else -> {}
                     }
                 }
             }
@@ -82,6 +79,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
         adapter.setCallBack(object : MainAdapter.CallBack {
             override fun onItemClick(action: HomeActionEnum) {
+                sharedViewModel.homeAction(action)
                 viewModel.homeAction(action)
             }
         })
@@ -89,7 +87,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         binding.mainRecycler.adapter = adapter
 
         binding.avatarImage.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionGlobalProfileFragment())
+            sharedViewModel.homeAction(HomeActionEnum.PROFILE)
         }
     }
 

@@ -76,13 +76,18 @@ class HomeViewModel : ViewModel() {
         _listItems.value = items
     }
 
-    fun homeAction(action:HomeActionEnum){
+    fun homeAction(action: HomeActionEnum) {
         when (action) {
-            HomeActionEnum.TRANSFER -> { _action.tryEmit(HomeActionEnum.TRANSFER) }
-            HomeActionEnum.OFFER -> { _action.tryEmit(HomeActionEnum.OFFER) }
-            HomeActionEnum.CURRENCY -> { _action.tryEmit(HomeActionEnum.CURRENCY) }
-            HomeActionEnum.ALL_CARD -> { _action.tryEmit(HomeActionEnum.ALL_CARD) }
-            HomeActionEnum.ALL_TRANSACTION -> { _action.tryEmit(HomeActionEnum.ALL_TRANSACTION) }
+            HomeActionEnum.TRANSFER -> {
+                _action.tryEmit(HomeActionEnum.TRANSFER)
+            }
+            HomeActionEnum.OFFER -> {
+                _action.tryEmit(HomeActionEnum.OFFER)
+            }
+            HomeActionEnum.CURRENCY -> {
+                _action.tryEmit(HomeActionEnum.CURRENCY)
+            }
+            else -> {}
         }
     }
 }

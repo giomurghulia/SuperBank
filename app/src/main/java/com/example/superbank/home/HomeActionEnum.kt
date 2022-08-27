@@ -6,4 +6,5 @@ enum class HomeActionEnum {
     CURRENCY,
     ALL_CARD,
     ALL_TRANSACTION,
+    PROFILE,
 }

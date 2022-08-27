@@ -22,6 +22,8 @@ import com.example.superbank.SharedViewModel
 import com.example.superbank.basefragments.BaseFragment
 import com.example.superbank.databinding.FragmentAuthorizedUserBinding
 import com.example.superbank.databinding.FragmentTransactionsBinding
+import com.example.superbank.home.HomeActionEnum
+import com.example.superbank.home.HomeFragmentDirections
 import com.example.superbank.networking.RetrofitClient
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -44,16 +46,44 @@ class AuthorizedUserFragment : BaseFragment<FragmentAuthorizedUserBinding>(
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.offersFragment -> {binding.bottomNavigationView.visibility = View.GONE}
-                R.id.transferFragment -> {binding.bottomNavigationView.visibility = View.GONE}
-                R.id.transactionInfoFragment -> {binding.bottomNavigationView.visibility = View.GONE}
-                else -> { binding.bottomNavigationView.visibility = View.VISIBLE }
+                R.id.offersFragment -> {
+                    binding.bottomNavigationView.visibility = View.GONE
+                }
+                R.id.transferFragment -> {
+                    binding.bottomNavigationView.visibility = View.GONE
+                }
+                R.id.transactionInfoFragment -> {
+                    binding.bottomNavigationView.visibility = View.GONE
+                }
+                else -> {
+                    binding.bottomNavigationView.visibility = View.VISIBLE
+                }
             }
         }
 
         setupWithNavController(binding.bottomNavigationView, navController)
 
         sharedViewModel.getAuthorizedUserDate()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                sharedViewModel.action.collect {
+                    when (it) {
+                        HomeActionEnum.ALL_CARD -> {
+                            binding.bottomNavigationView.selectedItemId = R.id.CardFragment
+                        }
+                        HomeActionEnum.ALL_TRANSACTION -> {
+                            binding.bottomNavigationView.selectedItemId = R.id.transactionFragment
+                        }
+                        HomeActionEnum.PROFILE -> {
+                            binding.bottomNavigationView.selectedItemId = R.id.profileFragment
+                        }
+                        else -> {}
+
+                    }
+                }
+            }
+        }
 
 
     }

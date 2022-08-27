@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -32,6 +33,12 @@ class TransactionsFragment :
 
     private var timeList: List<OuterModel> = list
     private val viewModel: TransactionsViewModel by viewModels()
+
+    private val handler = Handler()
+    private val recyclerScrollRunnable = Runnable {
+        binding.recycler.smoothScrollToPosition(0)
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -213,8 +220,11 @@ class TransactionsFragment :
     }
 
     private fun scrollToTop() {
-        binding.recycler.postDelayed({
-            binding.recycler.smoothScrollToPosition(0)
-        }, 300)
+        handler.postDelayed(recyclerScrollRunnable, 300)
+    }
+
+    override fun onDestroyView() {
+        handler.removeCallbacks(recyclerScrollRunnable)
+        super.onDestroyView()
     }
 }

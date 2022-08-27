@@ -14,6 +14,7 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.example.superbank.basefragments.BaseFragment
 import com.example.superbank.databinding.FragmentCardsBinding
+import com.example.superbank.home.HomeActionEnum
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.launch
 
@@ -81,7 +82,7 @@ class CardFragment : BaseFragment<FragmentCardsBinding>(
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.action.collect {
-                    findNavController().navigate(CardFragmentDirections.actionGlobalTransactionFragment())
+                    sharedViewModel.homeAction(HomeActionEnum.ALL_TRANSACTION)
                 }
             }
         }

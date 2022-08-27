@@ -7,7 +7,14 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.superbank.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_offersFragment"
+            app:destination="@id/offersFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_transferFragment"
+            app:destination="@id/transferFragment" />
+    </fragment>
     <fragment
         android:id="@+id/CardFragment"
         android:name="com.example.superbank.cards.CardFragment"
@@ -60,22 +67,7 @@
         android:label="TransactionFragment" />
 
     <action
-        android:id="@+id/action_global_offersFragment"
-        app:destination="@id/offersFragment" />
-    <action
-        android:id="@+id/action_global_transferFragment"
-        app:destination="@id/transferFragment" />
-    <action
-        android:id="@+id/action_global_transactionFragment"
-        app:destination="@id/transactionFragment" />
-    <action
         android:id="@+id/action_global_transactionInfoFragment"
         app:destination="@id/transactionInfoFragment" />
-    <action
-        android:id="@+id/action_global_CardFragment"
-        app:destination="@id/CardFragment" />
-    <action
-        android:id="@+id/action_global_profileFragment"
-        app:destination="@id/profileFragment" />
 
 </navigation>
