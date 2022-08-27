@@ -27,8 +27,7 @@ class CardFragment : BaseFragment<FragmentCardsBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if(!isOnline())
-            return
+
         viewModel.getCards()
 
         binding.cardViewpager.adapter = cardsAdapter
@@ -62,9 +61,9 @@ class CardFragment : BaseFragment<FragmentCardsBinding>(
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.listItems.collect {
                     cardDescriptionAdapter.submitList(it)
-                    binding.mainRecycler.postDelayed({
-                        binding.mainRecycler.smoothScrollToPosition(0)
-                    }, 300)
+
+                    binding.mainRecycler.smoothScrollToPosition(0)
+
                 }
             }
         }

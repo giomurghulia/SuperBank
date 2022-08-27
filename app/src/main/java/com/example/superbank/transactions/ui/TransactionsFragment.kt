@@ -205,8 +205,6 @@ class TransactionsFragment :
     }
 
     private fun scrollToTop() {
-        binding.recycler.postDelayed({
-            binding.recycler.smoothScrollToPosition(0)
-        }, 300)
+        binding.recycler.smoothScrollToPosition(0)
     }
 }
