@@ -40,12 +40,12 @@ class OffersFragment : BaseFragment<FragmentOffersBinding>(FragmentOffersBinding
     }
 
     override fun bindObservers() {
-        lifecycleScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.requestState.collect {
                     when (it) {
                         is ResponseState.Success -> {
-                            if(it.body.isNotEmpty()){
+                            if (it.body.isNotEmpty()) {
                                 list = it.body
                                 offersAdapter.submitList(list)
                             }

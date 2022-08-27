@@ -28,8 +28,7 @@
         <entry key="app/src/main/res/layout/fragment_guest_user.xml" value="0.22552337646484377" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/fragment_my_cards.xml" value="0.2453125" />
-        <entry key="app/src/main/res/layout/fragment_offers.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.2453125" />
+        <entry key="app/src/main/res/layout/fragment_no_internet.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_offers.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.17" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.2453125" />

@@ -136,6 +136,7 @@ class TransactionsFragment :
                         }
                         is ResponseState.Error -> {
                             myToast(it.errorMessage)
+
                         }
                         is ResponseState.Load -> {
                             with(binding) {

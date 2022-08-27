@@ -1,5 +1,7 @@
 package com.example.superbank.basefragments
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +10,12 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
+import com.example.superbank.AuthorizedUser
 import com.example.superbank.SharedViewModel
+import com.example.superbank.authorized.AuthorizedUserFragmentDirections
+import com.example.superbank.guest.GuestUserFragmentDirections
 import com.example.superbank.types.Inflater
 
 abstract class BaseFragment<VB : ViewBinding>(private val inflater: Inflater<VB>) : Fragment() {
@@ -18,9 +24,9 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflater: Inflater<VB>
     private var _binding: VB? = null
     protected val binding get() = _binding!!
 
-    open fun init(){}
-    open fun listeners(){}
-    open fun bindObservers(){}
+    open fun init() {}
+    open fun listeners() {}
+    open fun bindObservers() {}
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,12 +38,15 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflater: Inflater<VB>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        sharedViewModel.checkAuthorizedUser()
+        if (isOnline())
+            sharedViewModel.checkAuthorizedUser()
+        else {
+            sharedViewModel.onNoInternet()
+            return
+        }
         init()
         listeners()
         bindObservers()
-
     }
 
     override fun onDestroy() {
@@ -47,5 +56,14 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflater: Inflater<VB>
 
     fun myToast(text: String) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+    }
+
+
+    fun isOnline(): Boolean {
+        val connectivityManager =
+            requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val capabilities =
+            connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+        return capabilities != null
     }
 }

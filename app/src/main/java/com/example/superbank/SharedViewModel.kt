@@ -21,8 +21,10 @@ class SharedViewModel : ViewModel() {
         extraBufferCapacity = 1,
         onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
-    val logOutUser get() = _logOutUser.asSharedFlow()
+    private val _noInternet = MutableStateFlow<Int>(0)
 
+    val logOutUser get() = _logOutUser.asSharedFlow()
+    val noInternet get() = _noInternet.asSharedFlow()
 
     fun checkAuthorizedUser() {
         Firebase.auth.currentUser?.reload()?.addOnCompleteListener{
@@ -38,6 +40,11 @@ class SharedViewModel : ViewModel() {
         _logOutUser.tryEmit(Unit)
         _authorizedUserData.value = null
     }
+
+    fun onNoInternet(){
+        _noInternet.tryEmit(1)
+    }
+    
 
     fun getAuthorizedUserDate() {
         viewModelScope.launch {

@@ -43,17 +43,19 @@ class AuthorizedUserFragment : BaseFragment<FragmentAuthorizedUserBinding>(
         val navController = navHostFragment.navController
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-           if (destination.id == R.id.transactionInfoFragment) {
-               binding.bottomNavigationView.visibility = View.GONE
-           } else {
-               binding.bottomNavigationView.visibility = View.VISIBLE
-           }
+            if (destination.id == R.id.transactionInfoFragment) {
+                binding.bottomNavigationView.visibility = View.GONE
+            } else {
+                binding.bottomNavigationView.visibility = View.VISIBLE
+            }
         }
 
         setupWithNavController(binding.bottomNavigationView, navController)
-
-        sharedViewModel.getAuthorizedUserDate()
-
+        if (isOnline())
+            sharedViewModel.getAuthorizedUserDate()
+        else{
+            sharedViewModel.onNoInternet()
+        }
 
     }
 }

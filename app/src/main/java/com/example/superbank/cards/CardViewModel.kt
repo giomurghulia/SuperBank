@@ -30,19 +30,21 @@ class CardViewModel : ViewModel() {
 
     fun getCards() {
         viewModelScope.launch {
-            val response = RetrofitClient.apiService.getCards()
+            try {
+                val response = RetrofitClient.apiService.getCards()
 
-            println(response)
-            if (response.isSuccessful) {
-                val cards = response.body()
-                _cards.value = cards ?: emptyList()
+                println(response)
+                if (response.isSuccessful) {
+                    val cards = response.body()
+                    _cards.value = cards ?: emptyList()
 
-                myCards = cards ?: emptyList()
+                    myCards = cards ?: emptyList()
 
-                if (!cards.isNullOrEmpty()) {
-                    getUpcomingPaymentAndTransactions(selectedCard)
+                    if (!cards.isNullOrEmpty()) {
+                        getUpcomingPaymentAndTransactions(selectedCard)
+                    }
                 }
-            }
+            }catch (e: Exception){}
         }
     }
 

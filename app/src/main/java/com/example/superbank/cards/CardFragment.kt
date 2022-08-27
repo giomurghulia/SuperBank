@@ -27,7 +27,8 @@ class CardFragment : BaseFragment<FragmentCardsBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        if(!isOnline())
+            return
         viewModel.getCards()
 
         binding.cardViewpager.adapter = cardsAdapter
