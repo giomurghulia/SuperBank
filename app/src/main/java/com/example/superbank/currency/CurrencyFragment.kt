@@ -49,8 +49,6 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(
         firstPicker.displayedValues = currencyName
         secondPicker.displayedValues = currencyName
 
-        firstPicker.textColor = resources.getColor(R.color.white)
-
         binding.firstInput.doAfterTextChanged {
             val amount = binding.firstInput.text.toString().toDouble()
             val firsValue = firstPicker.value

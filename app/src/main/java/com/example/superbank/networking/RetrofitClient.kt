@@ -86,7 +86,7 @@ interface ApiService {
     @POST(" ")
     suspend fun makeTransfer(@Body body: Transaction): Response<String>
 
-    @POST("7dfc1d37-00c4-44df-95cb-a496f3e03237?fbclid=IwAR0WFm0Qi6sopNKHFG-sfP0w_1Sgcu0uxEZGU7_Tu5_pL2w7pjhRyHbOqwU")
+    @POST("55fcdf95-3c56-42d9-953e-aeb4eb46fb59")
     suspend fun getTransactions(): Response<List<TransactionsGetModel>>
 
     @GET("bb3c6da5-2c18-42b4-98f9-d455ad89759f?fbclid=IwAR0fDWdRs2fpN0HY6yC0ezpiJ8MzT9p7F09VGFPVTwbmIie-vrnYPZcck1g")
