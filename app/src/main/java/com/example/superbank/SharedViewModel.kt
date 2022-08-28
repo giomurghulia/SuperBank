@@ -26,10 +26,12 @@ class SharedViewModel : ViewModel() {
 
     private val _isNotLoaded = MutableStateFlow(true)
 
-    val logOutUser get() = _logOutUser.asSharedFlow()
-    val noInternet get() = _noInternet.asStateFlow()
     val isNotLoaded get() = _isNotLoaded.asStateFlow()
 
+    val noInternet get() = _noInternet.asSharedFlow()
+
+
+    val logOutUser get() = _logOutUser.asSharedFlow()
 
     private val _action = MutableSharedFlow<HomeActionEnum>(
         replay = 0,

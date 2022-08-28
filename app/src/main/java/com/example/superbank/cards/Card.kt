@@ -1,7 +1,7 @@
 package com.example.superbank.cards
 
 data class Card(
-    val cardNumber: String,
+    val cardLastDigit: String,
     val cardBalance: Double,
     val cardDate: String,
     val cardCvc: Int,

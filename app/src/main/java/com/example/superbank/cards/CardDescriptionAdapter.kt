@@ -1,5 +1,6 @@
 package com.example.superbank.cards
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -91,8 +92,13 @@ class CardDescriptionAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: CardDescriptionListItem.CardTransactionsItem) {
-            binding.amountText.text = item.CardTransactions.amount.toString()
-            binding.titleText.text = "Test Shop"
+            binding.amountText.text =
+                if (item.amount > 0) "$${item.amount}" else "-$${-item.amount}"
+            binding.titleText.text = item.type.toString()
+
+            binding.iconImage.setImageResource(item.type.icon())
+            binding.iconImage.backgroundTintList =
+                ColorStateList.valueOf(binding.root.context.getColor(item.type.backgroundTint))
         }
     }
 

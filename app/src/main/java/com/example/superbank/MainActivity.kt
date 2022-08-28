@@ -55,8 +55,9 @@ class MainActivity : AppCompatActivity() {
         this.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.noInternet.collect {
-                    if (it == 1)
+                    if (it == 1) {
                         navController.navigate(R.id.action_global_noInternetFragment)
+                    }
                 }
             }
         }

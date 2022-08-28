@@ -67,7 +67,7 @@ class TransactionsViewModel : ViewModel() {
     private fun getTransactionFlow() = flow {
         emit(ResponseState.Load())
         try {
-            val response = RetrofitClient.apiService.getTransactions()
+            val response = RetrofitClient.apiService.getAllTransactions()
             if (response.isSuccessful) {
                 emit(ResponseState.Success(response.body() ?: listOf()))
             } else {

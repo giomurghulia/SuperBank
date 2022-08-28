@@ -1,5 +1,12 @@
 package com.example.superbank.profile
 
+import android.content.ContentValues.TAG
+import android.os.Bundle
+import android.util.Log
+import android.util.Patterns
+import android.view.View
+import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -13,6 +20,111 @@ import kotlinx.coroutines.launch
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(
     FragmentProfileBinding::inflate
 ) {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Firebase.auth.currentUser?.reload()
+        val user = Firebase.auth.currentUser
+
+        listeners()
+        bindObservers()
+        updateErrorStates()
+
+        binding.changeEmail.setOnClickListener {
+            binding.emailChangeLayout.visibility = View.VISIBLE
+            binding.changeEmail.hint = "Update Email"
+
+            val email = binding.emailChangeInput.text?.toString()
+
+            if (!isValidEmail(email)) {
+                binding.emailChangeLayout.error = ("Incorrect Email")
+            } else {
+                user!!.updateEmail(email!!)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            sharedViewModel.getAuthorizedUserDate()
+                            Log.d(TAG, "User email address updated.")
+                            Toast.makeText(
+                                context,
+                                "User Email address updated.",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+
+                            clearAndCloseInput()
+
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "Cant change Email, log out and try again",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                        }
+                    }
+            }
+        }
+
+        binding.changePassword.setOnClickListener {
+            binding.passChangeLayout.visibility = View.VISIBLE
+            binding.changePassword.hint = "Update Password"
+
+            val password = binding.passChangeInput.text?.toString()
+
+            if (!(password != null && password.isNotBlank() && password.length > 6)) {
+                binding.passChangeLayout.error = ("Incorrect Password")
+            } else {
+                user!!.updatePassword(password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.d(TAG, "User password updated.")
+                            Toast.makeText(context, "User Password updated.", Toast.LENGTH_SHORT)
+                                .show()
+
+                            clearAndCloseInput()
+
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "Cant change Password, log out and try again",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                        }
+                    }
+            }
+
+        }
+    }
+
+    private fun clearAndCloseInput() {
+        binding.passChangeInput.setText("")
+        binding.emailChangeInput.setText("")
+
+        binding.passChangeLayout.visibility = View.GONE
+        binding.changePassword.hint = "Change Password"
+
+        binding.emailChangeLayout.visibility = View.GONE
+        binding.changeEmail.hint = "Change Email"
+
+    }
+
+    private fun isValidEmail(email: String?): Boolean {
+        return if (email.isNullOrBlank()) {
+            false
+        } else {
+            Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        }
+    }
+
+    private fun updateErrorStates() = with(binding) {
+        emailChangeInput.doAfterTextChanged {
+            emailChangeLayout.error = null
+        }
+        passChangeInput.doAfterTextChanged {
+            passChangeLayout.error = null
+        }
+    }
+
     override fun listeners() {
         binding.logOutButton.setOnClickListener {
             Firebase.auth.signOut()

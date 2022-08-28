@@ -9,8 +9,8 @@
         <entry key="app/src/main/res/drawable/ic_bank_icon.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_account_balance_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_card_icon.xml" value="0.175" />
-        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1215" />
-        <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1225" />
+        <entry key="app/src/main/res/drawable/ic_currency.xml" value="0.1225" />
+        <entry key="app/src/main/res/drawable/ic_offer.xml" value="0.1225" />
         <entry key="app/src/main/res/drawable/ic_right.xml" value="0.252" />
         <entry key="app/src/main/res/drawable/ic_statement_icon.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_visa.xml" value="0.163" />

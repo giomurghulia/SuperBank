@@ -57,6 +57,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 }
             }
         }
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.action.collect {
@@ -68,6 +69,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToOffersFragment())
                         }
                         HomeActionEnum.CURRENCY -> {
+                            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCurrencyFragment())
                         }
                         else -> {}
                     }

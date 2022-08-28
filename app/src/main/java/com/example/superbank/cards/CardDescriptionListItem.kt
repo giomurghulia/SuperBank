@@ -1,5 +1,7 @@
 package com.example.superbank.cards
 
+import com.example.superbank.transactions.adapters.models.TransactionType
+
 sealed class CardDescriptionListItem(val viewType: ViewType) {
     enum class ViewType {
         UPCOMING_PAYMENT,
@@ -15,7 +17,9 @@ sealed class CardDescriptionListItem(val viewType: ViewType) {
     object QuickAction : CardDescriptionListItem(ViewType.QUICK_ACTION)
 
     data class CardTransactionsItem(
-        val CardTransactions: CardTransactions
+        val amount: Double,
+        val type: TransactionType,
+        val date: String
     ) : CardDescriptionListItem(ViewType.CARD_TRANSACTIONS)
 
     data class ItemHeaderItem(

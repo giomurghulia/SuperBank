@@ -1,6 +1,7 @@
 package com.example.superbank.home
 
 import com.example.superbank.cards.Card
+import com.example.superbank.transactions.adapters.models.TransactionType
 import com.example.superbank.transactions.getmodel.TransactionsGetModel
 
 sealed class HomeListItem(val viewType: ViewType) {
@@ -23,8 +24,11 @@ sealed class HomeListItem(val viewType: ViewType) {
     ) : HomeListItem(ViewType.CARDS)
 
     data class TransactionsItem(
-        val transaction: TransactionsGetModel
+        val title: String,
+        val type: TransactionType,
+        val amount: Double,
+        val cardLastDigits: String,
+        val description: String
     ) : HomeListItem(ViewType.TRANSACTIONS)
-
 
 }

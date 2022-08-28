@@ -22,7 +22,7 @@ class TransactionInfoFragment :
             val amountString =
                 if (args.amount[0] == '-') "-$${args.amount.subSequence(1..args.amount.lastIndex)}" else "$${args.amount}"
             amount.text = amountString
-            date.text = args.date
+//            date.text = args.date
             description.text = args.description
             backImage.setOnClickListener {
                 requireActivity().onBackPressed()

@@ -29,21 +29,6 @@
         tools:text="Grocery" />
 
     <TextView
-        android:id="@+id/numType_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/minus"
-        android:textColor="@color/white"
-        android:textSize="12sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/usd"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
-
-    <TextView
         android:id="@+id/amount_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
