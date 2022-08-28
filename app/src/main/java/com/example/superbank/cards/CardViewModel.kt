@@ -2,7 +2,9 @@ package com.example.superbank.cards
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.superbank.home.HomeListItem
 import com.example.superbank.networking.RetrofitClient
+import com.example.superbank.transactions.adapters.models.TransactionType
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -84,7 +86,8 @@ class CardViewModel : ViewModel() {
                 }
 
                 buildListItem(upcomingPayment, transactions, CardDescriptionListItem.QuickAction)
-            }catch (e: Exception){}
+            } catch (e: Exception) {
+            }
         }
     }
 
@@ -107,10 +110,25 @@ class CardViewModel : ViewModel() {
             items.add(CardDescriptionListItem.ItemHeaderItem("Recent Transactions"))
         }
         transactions?.map { item ->
-            items.add(CardDescriptionListItem.CardTransactionsItem(item))
+            items.add(
+                CardDescriptionListItem.CardTransactionsItem(
+                    item.amount, changeTypeToEnum(item.type), item.date
+                )
+            )
         }
-
         _listItems.value = items
+    }
+
+
+    private fun changeTypeToEnum(type: String): TransactionType {
+        return when (type) {
+            "GROCERY" -> TransactionType.GROCERY
+            "CARD" -> TransactionType.CARD
+            "TRANSFER" -> TransactionType.TRANSFER
+            "BILL" -> TransactionType.BILL
+            "SALARY" -> TransactionType.SALARY
+            else -> TransactionType.GROCERY
+        }
     }
 
     fun onItemClick(itemId: QuickActionEnum) {

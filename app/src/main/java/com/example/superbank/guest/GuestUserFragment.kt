@@ -16,7 +16,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.superbank.R
 import com.example.superbank.SharedViewModel
-import com.example.superbank.basefragments.BaseFragment
 import com.example.superbank.databinding.FragmentGuestUserBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

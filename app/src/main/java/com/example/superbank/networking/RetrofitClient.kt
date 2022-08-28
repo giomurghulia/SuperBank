@@ -65,10 +65,10 @@ object RetrofitClient {
 }
 
 interface ApiService {
-    @POST("5420dba3-7074-424f-9a18-b6bbfe395e6c")
+    @POST("0df7330a-07af-4a14-bcd1-48e7d9dda304")
     suspend fun getAuthorizedUserDate(): Response<AuthorizedUser>
 
-    @POST("1ca0503a-753e-4523-9c63-297f58a5c64d")
+    @POST("a02873c1-ed55-4a92-b5bf-733a70ea9030")
     suspend fun getCards(): Response<List<Card>>
 
     @POST("090e51b1-fa61-4996-879e-9b5666b6bf20")
@@ -80,16 +80,16 @@ interface ApiService {
     @POST("97b1fc29-5d3d-44c1-831e-02a4c417f78f")
     suspend fun getUpcomingPayment(@Query("uniqueId") uniqueId: String): Response<UpcomingPayment>
 
-    @POST("35234356-0b36-417c-8563-0c36b842c3fb")
+    @POST("13269c18-b9ee-468e-ba94-93d877987243")
     suspend fun getCardTransactions(@Query("uniqueId") uniqueId: String): Response<List<CardTransactions>>
 
     @POST(" ")
     suspend fun makeTransfer(@Body body: Transaction): Response<String>
 
-    @POST("55fcdf95-3c56-42d9-953e-aeb4eb46fb59")
-    suspend fun getTransactions(): Response<List<TransactionsGetModel>>
+    @POST("fb3cde5d-eb2f-49d6-8ea2-6f774593164c")
+    suspend fun getAllTransactions(): Response<List<TransactionsGetModel>>
 
-    @GET("bb3c6da5-2c18-42b4-98f9-d455ad89759f?fbclid=IwAR0fDWdRs2fpN0HY6yC0ezpiJ8MzT9p7F09VGFPVTwbmIie-vrnYPZcck1g")
+    @GET("9b8dce28-9481-4194-9a93-34a9841038d4")
     suspend fun getOffers(): Response<List<OfferModel>>
 
     @GET

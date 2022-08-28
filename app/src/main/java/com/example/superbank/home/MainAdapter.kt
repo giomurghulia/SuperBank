@@ -1,6 +1,7 @@
 package com.example.superbank.home
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -99,15 +100,19 @@ class MainAdapter :
         @SuppressLint("SetTextI18n")
         fun bind(item: HomeListItem.CardsItem) {
             binding.titleText.text = item.card.cardType
-            binding.cardNumText.text = item.card.cardNumber
+            binding.cardNumText.text = "***" + item.card.cardLastDigit
             binding.amountText.text = "$" + item.card.cardBalance.toString()
             binding.cardDateText.text = item.card.cardDate
 
             if (item.card.cardType == VISA) {
                 binding.iconImage.setImageResource(R.drawable.ic_visa)
             }
-            if (item.card.cardType == MASTERCARD){
+            if (item.card.cardType == MASTERCARD) {
                 binding.iconImage.setImageResource(R.drawable.ic_mastercard)
+            }
+
+            binding.root.setOnClickListener {
+                callBack?.onItemClick(HomeActionEnum.ALL_CARD)
             }
 
         }
@@ -116,17 +121,12 @@ class MainAdapter :
     private inner class TransactionsItemViewHolder(private val binding: LayoutCardTransactionBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: HomeListItem.TransactionsItem) {
-            val amount = item.transaction.amount
-            val amountNum = amount * -1
-            binding.titleText.text = item.transaction.title
-
-
-            if (amount < 0) {
-                binding.amountText.text = amountNum.toString()
-                binding.numTypeText.text = "-"
-            } else {
-                binding.amountText.text = amount.toString()
-            }
+            binding.iconImage.setImageResource(item.type.icon())
+            binding.iconImage.backgroundTintList =
+                ColorStateList.valueOf(binding.root.context.getColor(item.type.backgroundTint))
+            binding.amountText.text =
+                if (item.amount > 0) "$${item.amount}" else "-$${-item.amount}"
+            binding.titleText.text = item.title
         }
     }
 

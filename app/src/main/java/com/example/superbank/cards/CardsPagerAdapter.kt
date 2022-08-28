@@ -1,7 +1,6 @@
 package com.example.superbank.cards
 
 import android.annotation.SuppressLint
-import android.text.TextUtils.substring
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -44,7 +43,7 @@ class CardsPagerAdapter : RecyclerView.Adapter<CardsPagerAdapter.ViewHolder>() {
         private val binding: LayoutCardItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Card) {
-            binding.carNumberText.text = getCardNumber(item.cardNumber)
+            binding.carNumberText.text = getCardNumber(item.cardLastDigit)
             binding.balanceText.text = item.cardBalance.toString()
             binding.cardDateText.text = item.cardDate
 
@@ -57,7 +56,7 @@ class CardsPagerAdapter : RecyclerView.Adapter<CardsPagerAdapter.ViewHolder>() {
         }
     }
 
-    private fun getCardNumber(cardNum: String): String {
-        return "**** **** **** " + cardNum.substring(cardNum.length - 5, cardNum.length - 1)
+    private fun getCardNumber(cardLastDigit: String): String {
+        return "**** **** **** " + cardLastDigit
     }
 }

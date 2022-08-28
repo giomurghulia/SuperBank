@@ -3,8 +3,8 @@ package com.example.superbank.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.superbank.cards.Card
-import com.example.superbank.cards.CardDescriptionListItem
 import com.example.superbank.networking.RetrofitClient
+import com.example.superbank.transactions.adapters.models.TransactionType
 import com.example.superbank.transactions.getmodel.TransactionsGetModel
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -18,7 +18,7 @@ class HomeViewModel : ViewModel() {
     private val _listItems = MutableStateFlow<List<HomeListItem>>(emptyList())
     val listItems get() = _listItems.asStateFlow()
 
-    private val _balance = MutableStateFlow<String>("0.00")
+    private val _balance = MutableStateFlow("0.00")
     val balance get() = _balance.asStateFlow()
 
     private val _action = MutableSharedFlow<HomeActionEnum>(
@@ -52,7 +52,15 @@ class HomeViewModel : ViewModel() {
             )
 
             transactions.map { item ->
-                items.add(HomeListItem.TransactionsItem(item))
+                items.add(
+                    HomeListItem.TransactionsItem(
+                        item.title,
+                        changeTypeToEnum(item.type),
+                        item.amount,
+                        item.cardLastDigit,
+                        item.description
+                    )
+                )
             }
         }
         _listItems.value = items
@@ -67,12 +75,23 @@ class HomeViewModel : ViewModel() {
         _balance.tryEmit(balance.toString())
     }
 
+    private fun changeTypeToEnum(type: String): TransactionType {
+        return when (type) {
+            "GROCERY" -> TransactionType.GROCERY
+            "CARD" -> TransactionType.CARD
+            "TRANSFER" -> TransactionType.TRANSFER
+            "BILL" -> TransactionType.BILL
+            "SALARY" -> TransactionType.SALARY
+            else -> TransactionType.GROCERY
+        }
+    }
+
     fun getTransactionsAndCard() {
         viewModelScope.launch {
             var cards: List<Card>? = null
             var transactions: List<TransactionsGetModel>? = null
 
-            val responseTransactions = RetrofitClient.apiService.getTransactions()
+            val responseTransactions = RetrofitClient.apiService.getAllTransactions()
 
             if (responseTransactions.isSuccessful) {
                 transactions = responseTransactions.body()
@@ -88,6 +107,7 @@ class HomeViewModel : ViewModel() {
             buildListItem(cards, transactions)
         }
     }
+
 
     fun homeAction(action: HomeActionEnum) {
         when (action) {

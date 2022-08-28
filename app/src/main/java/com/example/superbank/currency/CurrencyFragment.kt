@@ -50,7 +50,8 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(
         secondPicker.displayedValues = currencyName
 
         binding.firstInput.doAfterTextChanged {
-            val amount = binding.firstInput.text.toString().toDouble()
+            val amount = binding.firstInput.text.toString().toDoubleOrNull() ?: 0.0
+
             val firsValue = firstPicker.value
             val secondValue = secondPicker.value
 
@@ -58,7 +59,7 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(
         }
 
         firstPicker.setOnScrollListener { numberPicker, i ->
-            val amount = binding.firstInput.text.toString().toDouble()
+            val amount = binding.firstInput.text.toString().toDoubleOrNull() ?: 0.0
             val firsValue = firstPicker.value
             val secondValue = secondPicker.value
 
@@ -67,7 +68,7 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(
 
 
         secondPicker.setOnScrollListener { numberPicker, i ->
-            val amount = binding.firstInput.text.toString().toDouble()
+            val amount = binding.firstInput.text.toString().toDoubleOrNull() ?: 0.0
             val firsValue = firstPicker.value
             val secondValue = secondPicker.value
 
@@ -112,5 +113,8 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(
             }
         }
 
+        binding.backImage.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
     }
 }

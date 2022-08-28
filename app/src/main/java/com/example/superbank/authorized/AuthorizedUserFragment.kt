@@ -55,6 +55,9 @@ class AuthorizedUserFragment : BaseFragment<FragmentAuthorizedUserBinding>(
                 R.id.transactionInfoFragment -> {
                     binding.bottomNavigationView.visibility = View.GONE
                 }
+                R.id.currencyFragment -> {
+                    binding.bottomNavigationView.visibility = View.GONE
+                }
                 else -> {
                     binding.bottomNavigationView.visibility = View.VISIBLE
                 }
