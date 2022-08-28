@@ -15,6 +15,7 @@ import com.example.superbank.basefragments.BaseFragment
 import com.example.superbank.databinding.FragmentCurrencyBinding
 import kotlinx.coroutines.launch
 
+
 class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(
     FragmentCurrencyBinding::inflate
 ) {
@@ -42,7 +43,6 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(
 
         firstPicker.displayedValues = currencyName
         secondPicker.displayedValues = currencyName
-
         binding.firstInput.doAfterTextChanged {
             val amount = binding.firstInput.text.toString().toDoubleOrNull() ?: 0.0
 
@@ -52,23 +52,31 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(
             viewModel.setDate(firsValue, secondValue, amount)
         }
 
-        firstPicker.setOnScrollListener { _, _ ->
+        firstPicker.setOnValueChangedListener { numberPicker, i, i2 ->
             val amount = binding.firstInput.text.toString().toDoubleOrNull() ?: 0.0
-            val firsValue = firstPicker.value
             val secondValue = secondPicker.value
 
-            viewModel.setDate(firsValue, secondValue, amount)
+            viewModel.setDate(i2, secondValue, amount)
         }
+//        firstPicker.setOnScrollListener { firstPicker , newVal->
+//            val amount = binding.firstInput.text.toString().toDoubleOrNull() ?: 0.0
+//            val secondValue = secondPicker.value
+//
+//            viewModel.setDate(newVal, secondValue, amount)
+//        }
 
-
-        secondPicker.setOnScrollListener { _, _ ->
+//        secondPicker.setOnScrollListener { picker , newVal->
+//            val amount = binding.firstInput.text.toString().toDoubleOrNull() ?: 0.0
+//            val firsValue = firstPicker.value
+//
+//            viewModel.setDate(firsValue, newVal, amount)
+//        }
+        secondPicker.setOnValueChangedListener { numberPicker, i, i2 ->
             val amount = binding.firstInput.text.toString().toDoubleOrNull() ?: 0.0
-            val firsValue = firstPicker.value
-            val secondValue = secondPicker.value
+            val firstValue = firstPicker.value
 
-            viewModel.setDate(firsValue, secondValue, amount)
+            viewModel.setDate(firstValue, i2, amount)
         }
-
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.result.collect {
