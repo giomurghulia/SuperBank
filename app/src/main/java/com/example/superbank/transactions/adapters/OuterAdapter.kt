@@ -7,12 +7,13 @@ import android.widget.Toolbar
 import androidx.recyclerview.widget.*
 import com.example.superbank.databinding.OuterRecyclerItemBinding
 import com.example.superbank.transactions.adapters.diffutils.OuterDiffUtil
+import com.example.superbank.transactions.adapters.models.InnerModel
 import com.example.superbank.transactions.adapters.models.OuterModel
 
 class OuterAdapter : ListAdapter<OuterModel, OuterAdapter.OuterViewHolder>(OuterDiffUtil()) {
-    private lateinit var clickListener: (title: String, type: String, amount: String, description: String, cardLastDigits: String, date: String) -> Unit
+    private lateinit var clickListener: (transaction: InnerModel) -> Unit
 
-    fun setOnOuterItemClickListener(listener: (title: String, type: String, amount: String, description: String, cardLastDigits: String, date: String) -> Unit) {
+    fun setOnOuterItemClickListener(listener: (transition: InnerModel) -> Unit) {
         clickListener = listener
     }
 
@@ -47,9 +48,11 @@ class OuterAdapter : ListAdapter<OuterModel, OuterAdapter.OuterViewHolder>(Outer
                 date.text = model.time
                 val manager = LinearLayoutManager(binding.root.context)
                 val adapter = InnerAdapter().apply {
-                    setOnItemClickListener { title: String, type: String, amount: String, description: String, cardLastDigits: String ->
+                    setOnItemClickListener {
                         if (this@OuterAdapter::clickListener.isInitialized)
-                            clickListener(title, type, amount, description, cardLastDigits, model.time)
+                            clickListener(
+                                it
+                            )
                     }
                 }
                 innerRecycler.layoutParams = params

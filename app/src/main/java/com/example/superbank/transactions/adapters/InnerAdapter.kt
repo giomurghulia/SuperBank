@@ -11,9 +11,9 @@ import com.example.superbank.transactions.adapters.models.InnerModel
 
 class InnerAdapter :
     ListAdapter<InnerModel, InnerAdapter.InnerViewHolder>(InnerDiffUtil()) {
-    private lateinit var clickListener: (title: String, type: String, amount: String, description: String, cardLastDigits: String) -> Unit
+    private lateinit var clickListener: (transaction: InnerModel) -> Unit
 
-    fun setOnItemClickListener(listener: (title: String, type: String, amount: String, description: String, cardLastDigits: String) -> Unit) {
+    fun setOnItemClickListener(listener: (transaction: InnerModel) -> Unit) {
         clickListener = listener
     }
 
@@ -33,11 +33,7 @@ class InnerAdapter :
                 root.setOnClickListener {
                     if (this@InnerAdapter::clickListener.isInitialized)
                         clickListener(
-                            model.title,
-                            model.type.toString(),
-                            model.amount.toString(),
-                            model.description,
-                            model.cardLastDigits
+                            model
                         )
                 }
                 icon.setImageResource(model.type.icon())

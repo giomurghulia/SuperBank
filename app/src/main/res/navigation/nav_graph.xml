@@ -40,23 +40,8 @@
         android:label="fragment_transaction_info"
         tools:layout="@layout/fragment_transaction_info">
         <argument
-            android:name="type"
-            app:argType="string" />
-        <argument
-            android:name="amount"
-            app:argType="string" />
-        <argument
-            android:name="date"
-            app:argType="string" />
-        <argument
-            android:name="description"
-            app:argType="string" />
-        <argument
-            android:name="cardLastNumbers"
-            app:argType="string" />
-        <argument
-            android:name="title"
-            app:argType="string" />
+            android:name="transaction"
+            app:argType="com.example.superbank.transactions.adapters.models.InnerModel" />
     </fragment>
 
     <fragment

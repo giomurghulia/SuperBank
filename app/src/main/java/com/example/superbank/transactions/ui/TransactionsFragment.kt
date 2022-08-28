@@ -18,6 +18,7 @@ import com.example.superbank.databinding.FragmentTransactionsBinding
 import com.example.superbank.networking.responsestate.ResponseState
 import com.example.superbank.transactions.DATE_FORMAT
 import com.example.superbank.transactions.adapters.OuterAdapter
+import com.example.superbank.transactions.adapters.models.InnerModel
 import com.example.superbank.transactions.adapters.models.OuterModel
 import com.example.superbank.transactions.getmodel.toOuterList
 import kotlinx.coroutines.Dispatchers
@@ -51,15 +52,10 @@ class TransactionsFragment :
     private val adapter by lazy {
         OuterAdapter().apply {
             submitList(list)
-            setOnOuterItemClickListener { title: String, type: String, amount: String, description: String, cardLastDigits: String, date: String ->
+            setOnOuterItemClickListener { transaction: InnerModel ->
                 findNavController().navigate(
                     TransactionsFragmentDirections.actionGlobalTransactionInfoFragment(
-                        type,
-                        amount,
-                        date,
-                        description,
-                        cardLastDigits,
-                        title
+                        transaction
                     )
                 )
             }
