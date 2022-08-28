@@ -40,4 +40,11 @@
     <string name="try_again"><a href="#">Try Again</a></string>
     <string name="view_all">View All</string>
     <string name="currency">Currency</string>
+    
+    <string-array name="currency_name">
+        <item>GEL</item>
+        <item>USD</item>
+        <item>EUR</item>
+        <item>GBP</item>
+    </string-array>
 </resources>

@@ -30,6 +30,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.26135310472659873" />
         <entry key="app/src/main/res/layout/fragment_authorized_user.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/fragment_cards.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/layout/fragment_currency.xml" value="0.2719340006510416" />
         <entry key="app/src/main/res/layout/fragment_guest_user.xml" value="0.22552337646484377" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.21672821044921875" />
         <entry key="app/src/main/res/layout/fragment_my_cards.xml" value="0.2453125" />
@@ -38,7 +39,7 @@
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/fragment_transactions.xml" value="0.19667063923069336" />
         <entry key="app/src/main/res/layout/fragment_transfer.xml" value="0.2318267822265625" />
-        <entry key="app/src/main/res/layout/inner_recycler_item.xml" value="0.48781882894163764" />
+        <entry key="app/src/main/res/layout/inner_recycler_item.xml" value="0.34093075596334366" />
         <entry key="app/src/main/res/layout/layout_card.xml" value="0.16940289367473005" />
         <entry key="app/src/main/res/layout/layout_card_item.xml" value="0.27826995849609376" />
         <entry key="app/src/main/res/layout/layout_card_transaction.xml" value="0.2825073242187499" />

@@ -4,6 +4,7 @@ import com.example.superbank.AuthorizedUser
 import com.example.superbank.cards.Card
 import com.example.superbank.cards.CardTransactions
 import com.example.superbank.cards.UpcomingPayment
+import com.example.superbank.currency.CurrencyItemModel
 import com.example.superbank.offers.adapter.OfferModel
 import com.example.superbank.transactions.getmodel.TransactionsGetModel
 import com.example.superbank.transfer.Transaction
@@ -16,17 +17,14 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 object RetrofitClient {
     private const val BASE_URL = "https://run.mocky.io/v3/"
     private const val TOKEN_KEY = "token"
     val token: String?
         get() {
-           return Firebase.auth.currentUser?.uid
+            return Firebase.auth.currentUser?.uid
         }
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
@@ -42,7 +40,7 @@ object RetrofitClient {
             .build()
     }
 
-    val apiService by lazy {
+    val apiService: ApiService by lazy {
         retrofitBuilder.create(ApiService::class.java)
     }
 
@@ -93,4 +91,7 @@ interface ApiService {
 
     @GET("bb3c6da5-2c18-42b4-98f9-d455ad89759f?fbclid=IwAR0fDWdRs2fpN0HY6yC0ezpiJ8MzT9p7F09VGFPVTwbmIie-vrnYPZcck1g")
     suspend fun getOffers(): Response<List<OfferModel>>
+
+    @GET
+    suspend fun getCurrency(@Url link: String): Response<CurrencyItemModel>
 }

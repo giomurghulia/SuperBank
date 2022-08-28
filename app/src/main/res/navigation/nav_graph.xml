@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_homeFragment_to_transferFragment"
             app:destination="@id/transferFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_currencyFragment"
+            app:destination="@id/currencyFragment" />
     </fragment>
     <fragment
         android:id="@+id/CardFragment"
@@ -69,5 +72,9 @@
     <action
         android:id="@+id/action_global_transactionInfoFragment"
         app:destination="@id/transactionInfoFragment" />
+    <fragment
+        android:id="@+id/currencyFragment"
+        android:name="com.example.superbank.currency.CurrencyFragment"
+        android:label="CurrencyFragment" />
 
 </navigation>
