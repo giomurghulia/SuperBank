@@ -6,6 +6,7 @@ import com.example.superbank.networking.RetrofitClient
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.math.RoundingMode
 
 class CurrencyViewModel : ViewModel() {
 
@@ -23,7 +24,9 @@ class CurrencyViewModel : ViewModel() {
     private var allCurrencyItem = mutableMapOf<Int, CurrencyItem>()
 
     private fun calculateResult() {
-        _result.tryEmit(amount * currencyRate)
+        _result.tryEmit(
+            (amount * currencyRate).toBigDecimal().setScale(2, RoundingMode.DOWN).toDouble()
+        )
     }
 
     fun setDate(position1: Int, position2: Int, num: Double) {

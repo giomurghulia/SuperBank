@@ -27,9 +27,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         listeners()
         bindObservers()
         updateErrorStates()
-
+        binding.hideEmail.setOnClickListener {
+            binding.emailChangeFrame.visibility = View.GONE
+        }
+        binding.hidePassword.setOnClickListener{
+            binding.passwordChangeFrame.visibility = View.GONE
+        }
         binding.changeEmail.setOnClickListener {
-            binding.emailChangeLayout.visibility = View.VISIBLE
+            binding.emailChangeFrame.visibility = View.VISIBLE
             binding.changeEmail.hint = "Update Email"
 
             val email = binding.emailChangeInput.text?.toString()
@@ -64,7 +69,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         }
 
         binding.changePassword.setOnClickListener {
-            binding.passChangeLayout.visibility = View.VISIBLE
+            binding.passwordChangeFrame.visibility = View.VISIBLE
             binding.changePassword.hint = "Update Password"
 
             val password = binding.passChangeInput.text?.toString()

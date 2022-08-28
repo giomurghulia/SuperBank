@@ -44,7 +44,15 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(
         firstPicker.displayedValues = currencyName
         secondPicker.displayedValues = currencyName
         binding.firstInput.doAfterTextChanged {
-            val amount = binding.firstInput.text.toString().toDoubleOrNull() ?: 0.0
+            val rawText = binding.firstInput.text.toString()
+            val index = rawText.indexOf(".")
+            if (index != -1 && index + 3 < rawText.length) {
+                with(binding.firstInput) {
+                    setText(rawText.subSequence(0, index + 3))
+                    setSelection(text.toString().length)
+                }
+            }
+            val amount = rawText.toDoubleOrNull() ?: 0.0
 
             val firsValue = firstPicker.value
             val secondValue = secondPicker.value
@@ -52,26 +60,14 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(
             viewModel.setDate(firsValue, secondValue, amount)
         }
 
-        firstPicker.setOnValueChangedListener { numberPicker, i, i2 ->
+        firstPicker.setOnValueChangedListener { _, _, i2 ->
             val amount = binding.firstInput.text.toString().toDoubleOrNull() ?: 0.0
             val secondValue = secondPicker.value
 
             viewModel.setDate(i2, secondValue, amount)
         }
-//        firstPicker.setOnScrollListener { firstPicker , newVal->
-//            val amount = binding.firstInput.text.toString().toDoubleOrNull() ?: 0.0
-//            val secondValue = secondPicker.value
-//
-//            viewModel.setDate(newVal, secondValue, amount)
-//        }
 
-//        secondPicker.setOnScrollListener { picker , newVal->
-//            val amount = binding.firstInput.text.toString().toDoubleOrNull() ?: 0.0
-//            val firsValue = firstPicker.value
-//
-//            viewModel.setDate(firsValue, newVal, amount)
-//        }
-        secondPicker.setOnValueChangedListener { numberPicker, i, i2 ->
+        secondPicker.setOnValueChangedListener { _, _, i2 ->
             val amount = binding.firstInput.text.toString().toDoubleOrNull() ?: 0.0
             val firstValue = firstPicker.value
 
@@ -97,7 +93,7 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(
                                 Toast.LENGTH_SHORT
                             ).show()
 
-                            val amount = binding.firstInput.text.toString().toDoubleOrNull()?:0.0
+                            val amount = binding.firstInput.text.toString().toDoubleOrNull() ?: 0.0
                             val firsValue = firstPicker.value
                             val secondValue = secondPicker.value
 
