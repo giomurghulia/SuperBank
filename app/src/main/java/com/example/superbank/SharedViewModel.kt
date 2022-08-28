@@ -56,6 +56,7 @@ class SharedViewModel : ViewModel() {
 
     fun onNoInternet() {
         _noInternet.tryEmit(1)
+        _isNotLoaded.value = false
     }
 
 

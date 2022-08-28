@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         installSplashScreen().apply {
-            setKeepOnScreenCondition{
-                viewModel.isNotLoaded.value
+            setKeepOnScreenCondition {
+                viewModel.isNotLoaded.value && Firebase.auth.currentUser != null
             }
         }
         setContentView(binding.root)
