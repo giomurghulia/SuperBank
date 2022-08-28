@@ -15,7 +15,7 @@
 ![image](https://user-images.githubusercontent.com/107510454/187090090-ebef3562-1916-43c4-ad8d-8454b0dbac57.png)
 
 - ტრანზაქციები
-![image](https://user-images.githubusercontent.com/107510454/187090109-0a36627c-ae25-4b33-8f7b-bd475caafb9f.png)
+![image](https://user-images.githubusercontent.com/107510454/187090109-0a36627c-ae25-4b33-8f7b-bd475caafb9f.png | width=100)
 ![image](https://user-images.githubusercontent.com/107510454/187090473-135ebb70-af31-4360-a053-72444e86eb99.png)
 
 - საბანკო შეთავაზებები
