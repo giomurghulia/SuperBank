@@ -22,7 +22,7 @@ class SharedViewModel : ViewModel() {
         extraBufferCapacity = 1,
         onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
-    private val _noInternet = MutableStateFlow<Int>(0)
+    private val _noInternet = MutableStateFlow(0)
 
     private val _isNotLoaded = MutableStateFlow(true)
 

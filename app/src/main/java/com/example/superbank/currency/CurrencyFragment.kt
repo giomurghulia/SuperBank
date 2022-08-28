@@ -2,7 +2,6 @@ package com.example.superbank.currency
 
 import android.annotation.SuppressLint
 import android.os.Build
-import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -53,7 +52,7 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(
             viewModel.setDate(firsValue, secondValue, amount)
         }
 
-        firstPicker.setOnScrollListener { numberPicker, i ->
+        firstPicker.setOnScrollListener { _, _ ->
             val amount = binding.firstInput.text.toString().toDoubleOrNull() ?: 0.0
             val firsValue = firstPicker.value
             val secondValue = secondPicker.value
@@ -62,7 +61,7 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(
         }
 
 
-        secondPicker.setOnScrollListener { numberPicker, i ->
+        secondPicker.setOnScrollListener { _, _ ->
             val amount = binding.firstInput.text.toString().toDoubleOrNull() ?: 0.0
             val firsValue = firstPicker.value
             val secondValue = secondPicker.value

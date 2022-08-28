@@ -2,7 +2,6 @@ package com.example.superbank.cards
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.superbank.home.HomeListItem
 import com.example.superbank.networking.RetrofitClient
 import com.example.superbank.transactions.adapters.models.TransactionType
 import kotlinx.coroutines.channels.BufferOverflow

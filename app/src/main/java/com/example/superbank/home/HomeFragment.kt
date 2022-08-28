@@ -1,10 +1,6 @@
 package com.example.superbank.home
 
-import android.content.Context
-import android.os.Bundle
-import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -13,11 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.superbank.R
-import com.example.superbank.SharedViewModel
-import com.example.superbank.authorized.AuthorizedUserViewModel
 import com.example.superbank.basefragments.BaseFragment
-import com.example.superbank.cards.CardsPagerAdapter
-import com.example.superbank.cards.QuickActionEnum
 import com.example.superbank.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
 
@@ -46,7 +38,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                         .load(it?.avatar)
                         .centerInside()
                         .circleCrop()
-                        .into(binding.avatarImage);
+                        .into(binding.avatarImage)
                 }
             }
         }

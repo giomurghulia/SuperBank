@@ -3,7 +3,6 @@ package com.example.superbank.currency
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.superbank.networking.RetrofitClient
-import com.example.superbank.networking.responsestate.ResponseState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

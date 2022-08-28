@@ -11,7 +11,6 @@ import com.example.superbank.databinding.FragmentOffersBinding
 import com.example.superbank.networking.responsestate.ResponseState
 import com.example.superbank.offers.adapter.OfferModel
 import com.example.superbank.offers.adapter.OffersAdapter
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class OffersFragment : BaseFragment<FragmentOffersBinding>(FragmentOffersBinding::inflate) {

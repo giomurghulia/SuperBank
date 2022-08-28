@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.asSharedFlow
 
 
 class GuestUserViewModel : ViewModel() {
-    private val auth = Firebase.auth
 
     private val _state = MutableSharedFlow<Resource>(
         replay = 0,

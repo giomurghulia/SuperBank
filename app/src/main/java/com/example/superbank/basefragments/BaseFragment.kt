@@ -7,17 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
-import com.example.superbank.AuthorizedUser
 import com.example.superbank.R
 import com.example.superbank.SharedViewModel
-import com.example.superbank.authorized.AuthorizedUserFragmentDirections
-import com.example.superbank.guest.GuestUserFragmentDirections
 import com.example.superbank.types.Inflater
 
 abstract class BaseFragment<VB : ViewBinding>(private val inflater: Inflater<VB>) : Fragment() {

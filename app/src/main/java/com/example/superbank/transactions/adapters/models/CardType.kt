@@ -27,7 +27,7 @@ enum class CardType {
     companion object {
         fun stringToType(type: String) = when (type) {
             "VISA" -> VISA
-            "MASTERCARD" -> MASTERCARD
+            "Mastercard" -> MASTERCARD
             else -> DEFAULT
         }
     }

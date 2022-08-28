@@ -1,6 +1,5 @@
 package com.example.superbank.offers.adapter
 
-import com.squareup.moshi.Json
 
 data class OfferModel(
     val id: Int,

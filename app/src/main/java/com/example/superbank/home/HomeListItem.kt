@@ -2,7 +2,6 @@ package com.example.superbank.home
 
 import com.example.superbank.cards.Card
 import com.example.superbank.transactions.adapters.models.TransactionType
-import com.example.superbank.transactions.getmodel.TransactionsGetModel
 
 sealed class HomeListItem(val viewType: ViewType) {
     enum class ViewType {

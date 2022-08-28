@@ -1,7 +1,6 @@
 package com.example.superbank.profile
 
 import android.content.ContentValues.TAG
-import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import android.view.View
