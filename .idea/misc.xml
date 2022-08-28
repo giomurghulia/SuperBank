@@ -27,26 +27,24 @@
         <entry key="app/src/main/res/drawable/shape_selected_dot.xml" value="0.1645" />
         <entry key="app/src/main/res/drawable/splash_inset.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/vector_dravable.xml" value="0.1" />
-        <entry key="app/src/main/res/layout-v28/fragment_currency.xml" value="0.28072916666666664" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.26135310472659873" />
         <entry key="app/src/main/res/layout/fragment_authorized_user.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/fragment_cards.xml" value="0.24635416666666668" />
-        <entry key="app/src/main/res/layout/fragment_currency.xml" value="0.28177083333333336" />
+        <entry key="app/src/main/res/layout/fragment_currency.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_guest_user.xml" value="0.22552337646484377" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/fragment_my_cards.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/fragment_no_internet.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/fragment_offers.xml" value="0.3864077669902913" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.22716857910156252" />
+        <entry key="app/src/main/res/layout/fragment_offers.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.17" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.2453125" />
-        <entry key="app/src/main/res/layout/fragment_transaction_info.xml" value="0.2829214477539064" />
+        <entry key="app/src/main/res/layout/fragment_transaction_info.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_transactions.xml" value="0.18564102564102564" />
         <entry key="app/src/main/res/layout/fragment_transfer.xml" value="0.22" />
         <entry key="app/src/main/res/layout/inner_recycler_item.xml" value="0.1643646408839779" />
         <entry key="app/src/main/res/layout/layout_card.xml" value="0.16940289367473005" />
         <entry key="app/src/main/res/layout/layout_card_item.xml" value="0.27826995849609376" />
         <entry key="app/src/main/res/layout/layout_card_transaction.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/layout_home_card_item.xml" value="0.18425925925925926" />
         <entry key="app/src/main/res/layout/layout_item_header.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/layout_quick_action.xml" value="0.3263748168945313" />
         <entry key="app/src/main/res/layout/layout_upcoming_payment.xml" value="0.2477696736653645" />

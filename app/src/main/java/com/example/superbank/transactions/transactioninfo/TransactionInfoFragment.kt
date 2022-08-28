@@ -1,8 +1,7 @@
 package com.example.superbank.transactions.transactioninfo
 
 
-import android.os.Bundle
-import android.view.View
+import android.content.res.ColorStateList
 import androidx.navigation.fragment.navArgs
 import com.example.superbank.basefragments.BaseFragment
 import com.example.superbank.databinding.FragmentTransactionInfoBinding
@@ -14,19 +13,27 @@ class TransactionInfoFragment :
 
 
     override fun init() {
+        val transaction = args.transaction
         with(binding) {
-            val card = "$COVERED_PART_OR_CARD${args.cardLastNumbers}"
+            val card = "$COVERED_PART_OR_CARD${transaction.cardLastDigits}"
             carNumberText.text = card
-            title.text = args.title
-            type.text = args.type
-            val amountString =
-                if (args.amount[0] == '-') "-$${args.amount.subSequence(1..args.amount.lastIndex)}" else "$${args.amount}"
-            amount.text = amountString
-//            date.text = args.date
-            description.text = args.description
+            title.text = transaction.title
+            type.text = transaction.type.toString()
+            val amountString = transaction.amount.toString()
+
+            val amountStringClear =
+                if (amountString[0] == '-') "-$${amountString.subSequence(1..amountString.lastIndex)}" else "$${amountString}"
+            amount.text = amountStringClear
+            description.text = transaction.description
+            cardTypeImage.setImageResource(transaction.cardType.icon)
+            iconImage.setImageResource(transaction.type.icon())
+            titleText.text = transaction.cardType.toString()
+            cardTypeImage.backgroundTintList =
+                ColorStateList.valueOf(requireContext().getColor(transaction.type.backgroundTint))
             backImage.setOnClickListener {
                 requireActivity().onBackPressed()
             }
+
         }
     }
 }

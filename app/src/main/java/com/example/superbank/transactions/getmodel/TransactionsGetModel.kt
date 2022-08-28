@@ -1,5 +1,6 @@
 package com.example.superbank.transactions.getmodel
 
+import com.example.superbank.transactions.adapters.models.CardType
 import com.example.superbank.transactions.adapters.models.InnerModel
 import com.example.superbank.transactions.adapters.models.OuterModel
 import com.example.superbank.transactions.adapters.models.TransactionType
@@ -8,6 +9,7 @@ data class TransactionsGetModel(
     val title: String,
     val type: String,
     val amount: Double,
+    val cardType: String,
     val date: String,
     val cardLastDigit: String,
     val description: String
@@ -21,8 +23,12 @@ fun List<TransactionsGetModel>.toOuterList(): MutableList<OuterModel> {
                 OuterModel(
                     it.date, mutableListOf(
                         InnerModel(
-                            it.title, TransactionType.stringToType(it.type),
-                            it.amount, it.cardLastDigit, it.description
+                            it.title,
+                            TransactionType.stringToType(it.type),
+                            it.amount,
+                            it.cardLastDigit,
+                            it.description,
+                            CardType.stringToType(it.cardType)
                         )
                     )
                 )
@@ -31,7 +37,10 @@ fun List<TransactionsGetModel>.toOuterList(): MutableList<OuterModel> {
             (list[list.lastIndex].transactions as MutableList).add(
                 InnerModel(
                     it.title, TransactionType.stringToType(it.type),
-                    it.amount, it.cardLastDigit, it.description
+                    it.amount,
+                    it.cardLastDigit,
+                    it.description,
+                    CardType.stringToType(it.cardType)
                 )
             )
     }
