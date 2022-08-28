@@ -21,7 +21,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
     FragmentProfileBinding::inflate
 ) {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun init() {
         Firebase.auth.currentUser?.reload()
         val user = Firebase.auth.currentUser
 

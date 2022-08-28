@@ -34,11 +34,7 @@ class TransferFragment : BaseFragment<FragmentTransferBinding>(
     private val cardsAdapter = CardsPagerAdapter()
 
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
+    override fun init() {
         updateErrorStates()
         updateQuickAmount()
 
@@ -114,7 +110,6 @@ class TransferFragment : BaseFragment<FragmentTransferBinding>(
                 }
             }
         }
-
     }
 
     private fun updateErrorStates() = with(binding) {

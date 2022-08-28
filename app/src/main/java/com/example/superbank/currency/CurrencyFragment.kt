@@ -23,9 +23,7 @@ class CurrencyFragment : BaseFragment<FragmentCurrencyBinding>(
 
     @RequiresApi(Build.VERSION_CODES.Q)
     @SuppressLint("ResourceType")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun init() {
         val currencyName = resources.getStringArray(R.array.currency_name)
 
         viewModel.getCurrency(currencyName)

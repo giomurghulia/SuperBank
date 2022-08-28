@@ -50,8 +50,6 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflater: Inflater<VB>
         } else {
             sharedViewModel.onNoInternet()
         }
-
-
     }
 
     override fun onDestroy() {
