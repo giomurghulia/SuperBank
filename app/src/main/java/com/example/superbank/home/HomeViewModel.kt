@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.superbank.cards.Card
 import com.example.superbank.networking.RetrofitClient
+import com.example.superbank.transactions.adapters.models.CardType
 import com.example.superbank.transactions.adapters.models.TransactionType
 import com.example.superbank.transactions.getmodel.TransactionsGetModel
 import kotlinx.coroutines.channels.BufferOverflow
@@ -58,6 +59,7 @@ class HomeViewModel : ViewModel() {
                         changeTypeToEnum(item.type),
                         item.amount,
                         item.cardLastDigit,
+                        CardType.stringToType(item.type),
                         item.description
                     )
                 )

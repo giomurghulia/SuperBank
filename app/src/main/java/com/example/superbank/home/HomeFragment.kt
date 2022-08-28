@@ -1,5 +1,6 @@
 package com.example.superbank.home
 
+import android.annotation.SuppressLint
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -11,16 +12,21 @@ import com.bumptech.glide.Glide
 import com.example.superbank.R
 import com.example.superbank.basefragments.BaseFragment
 import com.example.superbank.databinding.FragmentHomeBinding
+import com.example.superbank.transactions.adapters.models.CardType
+import com.example.superbank.transactions.adapters.models.InnerModel
 import kotlinx.coroutines.launch
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
     FragmentHomeBinding::inflate
 ) {
+    private val VISA = "VISA"
+    private val MASTERCARD = "Mastercard"
 
     private val viewModel: HomeViewModel by viewModels()
     private val adapter = MainAdapter()
 
 
+    @SuppressLint("SetTextI18n")
     override fun init() {
         activity?.window?.statusBarColor =
             ContextCompat.getColor(requireContext(), R.color.light_blue)
@@ -80,6 +86,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             override fun onItemClick(action: HomeActionEnum) {
                 sharedViewModel.homeAction(action)
                 viewModel.homeAction(action)
+            }
+
+            override fun onTransactionClick(item: HomeListItem.TransactionsItem) {
+                val innerItem = InnerModel(
+                    item.title,
+                    item.type,
+                    item.amount,
+                    item.cardLastDigits,
+                    item.description,
+                    item.cardType
+                )
+                findNavController().navigate(
+                    HomeFragmentDirections.actionGlobalTransactionInfoFragment(innerItem)
+                )
             }
         })
         binding.mainRecycler.layoutManager = LinearLayoutManager(requireContext())

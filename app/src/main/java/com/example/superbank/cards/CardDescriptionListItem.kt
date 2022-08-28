@@ -19,7 +19,7 @@ sealed class CardDescriptionListItem(val viewType: ViewType) {
     data class CardTransactionsItem(
         val amount: Double,
         val type: TransactionType,
-        val date: String
+        val date: String,
     ) : CardDescriptionListItem(ViewType.CARD_TRANSACTIONS)
 
     data class ItemHeaderItem(

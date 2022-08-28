@@ -6,12 +6,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.example.superbank.basefragments.BaseFragment
 import com.example.superbank.databinding.FragmentCardsBinding
 import com.example.superbank.home.HomeActionEnum
+import com.example.superbank.home.HomeFragmentDirections
+import com.example.superbank.transactions.adapters.models.InnerModel
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.launch
 
@@ -85,6 +88,12 @@ class CardFragment : BaseFragment<FragmentCardsBinding>(
         cardDescriptionAdapter.setCallBack(object : CardDescriptionAdapter.CallBack {
             override fun onItemClick(itemId: QuickActionEnum) {
                 viewModel.onItemClick(itemId)
+            }
+
+            override fun onTransactionClick(item: InnerModel) {
+                findNavController().navigate(
+                    HomeFragmentDirections.actionGlobalTransactionInfoFragment(item)
+                )
             }
         })
     }

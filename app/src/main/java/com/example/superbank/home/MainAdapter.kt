@@ -12,6 +12,7 @@ import com.example.superbank.databinding.LayoutCardTransactionBinding
 import com.example.superbank.databinding.LayoutHomeCardItemBinding
 import com.example.superbank.databinding.LayoutHomeQuickActionBinding
 import com.example.superbank.databinding.LayoutItemHeaderBinding
+import com.example.superbank.transactions.adapters.models.InnerModel
 
 class MainAdapter :
     ListAdapter<HomeListItem, RecyclerView.ViewHolder>(MainDiffUtil()) {
@@ -127,10 +128,15 @@ class MainAdapter :
             binding.amountText.text =
                 if (item.amount > 0) "$${item.amount}" else "-$${-item.amount}"
             binding.titleText.text = item.title
+
+            binding.root.setOnClickListener {
+                callBack?.onTransactionClick(item)
+            }
         }
     }
 
     interface CallBack {
         fun onItemClick(action: HomeActionEnum)
+        fun onTransactionClick(item: HomeListItem.TransactionsItem)
     }
 }

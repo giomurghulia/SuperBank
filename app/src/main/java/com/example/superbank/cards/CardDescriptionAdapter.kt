@@ -10,6 +10,8 @@ import com.example.superbank.databinding.LayoutCardTransactionBinding
 import com.example.superbank.databinding.LayoutItemHeaderBinding
 import com.example.superbank.databinding.LayoutQuickActionBinding
 import com.example.superbank.databinding.LayoutUpcomingPaymentBinding
+import com.example.superbank.transactions.adapters.models.CardType
+import com.example.superbank.transactions.adapters.models.InnerModel
 
 class CardDescriptionAdapter :
     ListAdapter<CardDescriptionListItem, RecyclerView.ViewHolder>(MainDiffUtil()) {
@@ -99,6 +101,18 @@ class CardDescriptionAdapter :
             binding.iconImage.setImageResource(item.type.icon())
             binding.iconImage.backgroundTintList =
                 ColorStateList.valueOf(binding.root.context.getColor(item.type.backgroundTint))
+
+            binding.root.setOnClickListener {
+                val innerItem = InnerModel(
+                    item.type.toString(),
+                    item.type,
+                    item.amount,
+                    "123",
+                    "",
+                    CardType.VISA
+                )
+                callBack?.onTransactionClick(innerItem)
+            }
         }
     }
 
@@ -115,5 +129,6 @@ class CardDescriptionAdapter :
 
     interface CallBack {
         fun onItemClick(itemId: QuickActionEnum)
+        fun onTransactionClick(item: InnerModel)
     }
 }
