@@ -29,72 +29,85 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         updateErrorStates()
         binding.hideEmail.setOnClickListener {
             binding.emailChangeFrame.visibility = View.GONE
+            binding.emailChangeInput.setText("")
         }
-        binding.hidePassword.setOnClickListener{
+        binding.hidePassword.setOnClickListener {
             binding.passwordChangeFrame.visibility = View.GONE
+            binding.passChangeInput.setText("")
         }
         binding.changeEmail.setOnClickListener {
+            val isVisible = binding.emailChangeFrame.visibility == View.VISIBLE
+
             binding.emailChangeFrame.visibility = View.VISIBLE
             binding.changeEmail.hint = "Update Email"
 
             val email = binding.emailChangeInput.text?.toString()
 
-            if (!isValidEmail(email)) {
-                binding.emailChangeLayout.error = ("Incorrect Email")
-            } else {
-                user!!.updateEmail(email!!)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            sharedViewModel.getAuthorizedUserDate()
-                            Log.d(TAG, "User email address updated.")
-                            Toast.makeText(
-                                context,
-                                "User Email address updated.",
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
+            if (isVisible) {
+                if (!isValidEmail(email)) {
+                    binding.emailChangeLayout.error = ("Incorrect Email")
+                } else {
+                    user!!.updateEmail(email!!)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                sharedViewModel.getAuthorizedUserDate()
+                                Log.d(TAG, "User email address updated.")
+                                Toast.makeText(
+                                    context,
+                                    "User Email address updated.",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
 
-                            clearAndCloseInput()
+                                clearAndCloseInput()
 
-                        } else {
-                            Toast.makeText(
-                                context,
-                                "Cant change Email, log out and try again",
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "Cant change Email, log out and try again",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+                            }
                         }
-                    }
+                }
             }
         }
 
         binding.changePassword.setOnClickListener {
+            val isVisible = binding.passwordChangeFrame.visibility == View.VISIBLE
             binding.passwordChangeFrame.visibility = View.VISIBLE
             binding.changePassword.hint = "Update Password"
 
             val password = binding.passChangeInput.text?.toString()
 
-            if (!(password != null && password.isNotBlank() && password.length > 6)) {
-                binding.passChangeLayout.error = ("Incorrect Password")
-            } else {
-                user!!.updatePassword(password)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            Log.d(TAG, "User password updated.")
-                            Toast.makeText(context, "User Password updated.", Toast.LENGTH_SHORT)
-                                .show()
+            if (isVisible) {
+                if (!(password != null && password.isNotBlank() && password.length > 6)) {
+                    binding.passChangeLayout.error = ("Incorrect Password")
+                } else {
+                    user!!.updatePassword(password)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                Log.d(TAG, "User password updated.")
+                                Toast.makeText(
+                                    context,
+                                    "User Password updated.",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
 
-                            clearAndCloseInput()
+                                clearAndCloseInput()
 
-                        } else {
-                            Toast.makeText(
-                                context,
-                                "Cant change Password, log out and try again",
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "Cant change Password, log out and try again",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+                            }
                         }
-                    }
+                }
             }
 
         }
