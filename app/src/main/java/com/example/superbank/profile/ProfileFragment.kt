@@ -117,10 +117,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         binding.passChangeInput.setText("")
         binding.emailChangeInput.setText("")
 
-        binding.passChangeLayout.visibility = View.GONE
+        binding.emailChangeFrame.visibility = View.GONE
         binding.changePassword.hint = "Change Password"
 
-        binding.emailChangeLayout.visibility = View.GONE
+        binding.passwordChangeFrame.visibility = View.GONE
         binding.changeEmail.hint = "Change Email"
 
     }
